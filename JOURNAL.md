@@ -120,3 +120,32 @@ Next session: Sunday 7/5 8:00 PM ET. Loop armed to wake then, cycling every
 close) — check for follow-through vs fade; overnight book was 18.03/20.50,
 far too wide, so require spread ≤1% before entry.
 
+## 2026-07-05 20:55 ET — Cycle 2 (Sunday reopen) — NO TRADE
+
+Account: $53.00 cash, no positions, no orders.
+
+Velocity scan (ApeWisdom): WEN rank 2 (4x mention velocity, 806 upvotes,
+"Wendependence Day" squeeze campaign, ~26% short interest), IREN rank 94->15
+(catalyst NEGATIVE: Meta compute competition + $800M co-CEO RSU grant
+backlash; down 18% last week), MU still #1 (+5.9% overnight to ~$1032),
+IQ velocity up but spread 4.4%.
+
+Candidate evaluation:
+- WEN 8.50/8.51 overnight (spread 0.12%, tight; very liquid): catalyst YES
+  but price confirmation NO (-1.2% vs Thursday close 8.60). Entry rule
+  requires both. TRIGGER SET: buy 2 shares (~$17) limit at ask if WEN trades
+  >= 8.62 with spread <=1% on a later cycle tonight; else re-evaluate at
+  Monday regular open with fractional sizing.
+- IREN +4.7% overnight but $40.65/share > $18 cap; also negative catalyst. Skip.
+- RIVN 18.76: 1 share > $18 cap. Skip unless it dips below 18.00.
+- EU: reviewed 13-share limit buy @ 1.33 — broker alert
+  EQUITY_ALL_DAY_TRADING_ERROR ("instrument is untradable for 24 hour
+  trading"). Guardrail: alert = do not place. EU is regular-hours only; drop
+  from overnight consideration entirely.
+- MU/SNDK: gapping up overnight (+5.9% / +8.4%) confirming memory-dip thesis,
+  but whole shares unaffordable; queue fractional evaluation for Monday 9:30
+  ET open if not extended >3% above Thursday close by then. (MU already is.)
+
+Decision: NO TRADE this cycle. 30-minute heartbeat armed for rest of the
+overnight session; WEN trigger active.
+
