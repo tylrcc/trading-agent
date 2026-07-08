@@ -10,14 +10,13 @@ on its own, around the clock.
 
 </div>
 
-![Monte Carlo density surface](assets/monte-carlo-3d.png)
+![Monte Carlo simulation animation](assets/linkedin.gif)
 
 > Each slice of the mountain is one trading day: the ridge marks where the
-> 4,000 simulated accounts most likely sit, starting as a sharp spike at $53
-> and drifting toward $100+ as the year unfolds. Simulation under the
-> strategy's assumptions (modest 51% edge, fat-tailed winners, stops that can
-> gap to -18%) — not actual performance. Reproduce with
-> `python monte_carlo_surface.py`; a classic percentile-fan version is in
+> 10,000 simulated accounts most likely sit as the distribution evolves over
+> the year. Simulation under the strategy's assumptions (modest 51% edge,
+> fat-tailed winners, stops that can gap to -18%) — not actual performance.
+> Reproduce with `python linkedin_gif.py`; a classic percentile-fan version is in
 > [`assets/monte-carlo.png`](assets/monte-carlo.png).
 
 ## How it works
