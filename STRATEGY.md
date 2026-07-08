@@ -26,6 +26,10 @@ incremental gains and losses; the daily loss limit is the survival mechanism.
 - A candidate needs BOTH a narrative catalyst (Reddit velocity or news) AND
   price confirmation (positive momentum on the day, not already up >15% from
   the session open when we look, unless volume is exceptional).
+- If the name's mention velocity is already declining from its peak (meme
+  fade), a single momentum print is not enough: the trigger price must hold
+  across two consecutive cycles (60 min) before entry. (Added 7/8 after WEN
+  8.75 trigger would have lost 11% by Tuesday's close.)
 - Position size: $10-18 per position, max 3 concurrent, keep a cash buffer.
 - Regular hours (9:30-16:00 ET): fractional dollar-based market orders OK.
 - Outside regular hours: whole-share marketable limit orders only, and only in

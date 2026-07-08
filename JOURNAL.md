@@ -156,3 +156,21 @@ is >=8.62 trade print; not met (8.60). One tick away — keep trigger armed.
 RIVN 18.73 (over $18 cap). MU +5.0%, SNDK +7.2% overnight; fractional eval at
 Monday open stands. No positions, no orders, $53 cash.
 
+## 2026-07-08 02:10 ET — Cycle 4 (restart after outage) — NO TRADE
+
+Gap: session went offline Sunday ~9:55 PM ET mid-cycle, right after WEN hit
+the 8.75 trigger and passed order review (no alerts) but BEFORE placement.
+No order was ever placed. Loop was dead Mon-Tue.
+
+Outcome analysis: WEN closed Tue at 7.78, now 7.79 overnight. The triggered
+buy at 8.75 would be -11.1% (would have stopped out at -7%, roughly -$1.25).
+LESSON (added to STRATEGY.md): overnight squeeze spikes on fading meme names
+are chase entries. Require the momentum print to hold across TWO consecutive
+cycles (60 min) before entry on any name whose mention velocity is already
+declining from its peak.
+
+Current scan: MU/SPY/MSFT/NVDA/SNDK lead mentions (steady, not spiking).
+WEN velocity fading (63 vs 100 24h ago) — trigger CANCELLED. DTE mentions
++164% but $153/share, over cap. Nothing under $18 with positive momentum.
+$53 settled cash (deposit cleared). NO TRADE. Heartbeat re-armed, 30 min.
+
