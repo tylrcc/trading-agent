@@ -187,3 +187,14 @@ SOXL (3x semis, mention velocity +137%, $162 — too big for whole shares
 overnight; fractional at 9:30 open if semis gap constructive after Micron
 strength; MU steady #1 with 655 mentions).
 
+## 2026-07-08 06:42 ET — Cycle 5 (loop restart) — NO TRADE
+
+Stale heartbeat notification fired; confirmed no active loop was running.
+Re-armed 30m heartbeat. Overnight session live. $53 cash, no positions.
+
+Scan: MU #1 (658 mentions, steady), semis soft overnight (MU -3.6%, SNDK -3.4%,
+SOXL -2.9%). WEN flat at 7.77, spread 0.77% but velocity fading (60 vs 98
+24h ago). High-risk all-in mode active but no qualifying signal: nothing has
+both catalyst velocity AND positive momentum. Wait for regular hours (9:30 ET)
+for fractional SOXL/MU entries if semis stabilize.
+
