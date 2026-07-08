@@ -21,6 +21,16 @@ incremental gains and losses; the daily loss limit is the survival mechanism.
    tickers, and for broad market-moving headlines.
 3. Robinhood MCP: popular watchlists, scans, quotes, earnings calendar.
 
+## Risk mode: HIGH (user-authorized 2026-07-08)
+
+User goal is maximum growth and accepts total loss. Concentrate rather than
+diversify: one high-conviction position at a time, up to 100% of settled
+cash. Prefer the highest-velocity affordable candidate each day rather than
+waiting for perfect setups; an idle account cannot compound. Honest note
+recorded at user request time: the $10M target is not a realistic outcome;
+the operational target is aggressive daily compounding with a 50% daily
+loss floor so the experiment survives more than one bad day.
+
 ## Entry rules
 
 - A candidate needs BOTH a narrative catalyst (Reddit velocity or news) AND
@@ -36,12 +46,15 @@ incremental gains and losses; the daily loss limit is the survival mechanism.
   liquid names; skip anything with a bid-ask spread wider than 1%.
 - Cash account: only buy with settled funds. If cash is unsettled, log and wait.
 
-## Exit rules
+## Exit rules (high-risk tuning)
 
-- Take profit: +8% or catalyst played out, whichever first.
-- Stop: -7% from entry (checked each cycle; use limit sells, not stop orders
+- Let winners run: no fixed take-profit while mention velocity and price
+  momentum are both still rising; trail a mental stop of -10% from the high
+  water mark once up >15%.
+- Stop: -12% from entry (checked each cycle; use limit sells, not stop orders
   held overnight in illiquid names).
-- Time stop: exit any position with no thesis progress after 3 trading days.
+- Time stop: exit any position with no thesis progress after 2 trading days;
+  dead money blocks the next bet (settlement) at this account size.
 - Never average down.
 
 ## Cycle checklist (each loop tick)

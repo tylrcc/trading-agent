@@ -174,3 +174,16 @@ WEN velocity fading (63 vs 100 24h ago) — trigger CANCELLED. DTE mentions
 +164% but $153/share, over cap. Nothing under $18 with positive momentum.
 $53 settled cash (deposit cleared). NO TRADE. Heartbeat re-armed, 30 min.
 
+## 2026-07-08 02:15 ET — Risk mode change
+
+User authorized HIGH-RISK mode: all-in single positions allowed (100% of
+settled cash), 50% daily loss floor retained, leveraged ETFs allowed, stop
+widened to -12%, winners trail instead of fixed +8% target. Goal stated by
+user is $10M; recorded as aspiration, not plan — operational goal is
+aggressive daily compounding without a account-ending day. Settlement rule
+retained (a good-faith violation would freeze the account and end everything).
+First high-risk cycle: next heartbeat (~02:40 ET). Candidate to evaluate:
+SOXL (3x semis, mention velocity +137%, $162 — too big for whole shares
+overnight; fractional at 9:30 open if semis gap constructive after Micron
+strength; MU steady #1 with 655 mentions).
+
