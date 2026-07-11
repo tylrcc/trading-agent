@@ -211,3 +211,25 @@ if cash is still unspent by 15:00 ET, take the strongest same-day momentum
 name (one-cycle confirmation, spread rule still applies). Exit rules
 unchanged. Wake timer armed for Sunday 7:55 PM ET.
 
+## 2026-07-11 19:55 ET — Full agent rebuild
+
+Path fixed: repo lives at ~/ty/projects/trading-agent (old ~/ty/trading-agent
+paths were stale and broke runners). STRATEGY rewritten for $53 max-growth
+day trades: regular-hours fractional all-in, deploy-by-10:30 mandate,
+same-day exit preference (+4% / 15:30 flatten), leveraged ETFs allowed.
+launchd cycle + learning + keepawake reinstalled with new paths and a
+4-minute hung-agent timeout. Account still $53 settled, no positions.
+Next live session: Sunday 7/12 8:00 PM ET; Monday regular hours are the
+primary deploy window.
+
+
+## 2026-07-11 19:55 ET — Full agent rebuild
+
+Path fixed: repo lives at ~/ty/projects/trading-agent (old ~/ty/trading-agent
+paths were stale and broke runners). STRATEGY rewritten for $53 max-growth
+day trades: regular-hours fractional all-in, deploy-by-10:30 mandate,
+same-day exit preference (+4% / 15:30 flatten), leveraged ETFs allowed.
+launchd cycle + learning + keepawake reinstalled with new paths and a
+4-minute hung-agent timeout. Account still $53 settled, no positions.
+Next live session: Sunday 7/12 8:00 PM ET; Monday regular hours are the
+primary deploy window.

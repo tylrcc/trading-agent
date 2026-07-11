@@ -7,7 +7,7 @@
     <key>ProgramArguments</key>
     <array>
         <string>/bin/zsh</string>
-        <string>/Users/tyler/ty/trading-agent/run-learning.sh</string>
+        <string>/Users/tyler/ty/projects/trading-agent/run-learning.sh</string>
     </array>
     <key>StartCalendarInterval</key>
     <dict>
@@ -19,6 +19,6 @@
     <key>RunAtLoad</key>
     <false/>
     <key>StandardErrorPath</key>
-    <string>/Users/tyler/ty/trading-agent/launchd-learning.err</string>
+    <string>/Users/tyler/ty/projects/trading-agent/launchd-learning.err</string>
 </dict>
 </plist>

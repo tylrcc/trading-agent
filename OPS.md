@@ -1,46 +1,45 @@
 # Trading Agent Operations
 
-The trading agent runs on its own via macOS launchd + the Cursor CLI
-(`cursor-agent`, logged in as ty853496@ucf.edu, billed to the Cursor plan).
-No chat session needs to be open.
+Repo path: `/Users/tyler/ty/projects/trading-agent`
+Public: https://github.com/tylrcc/trading-agent
 
-## Jobs
+## How it runs
 
-| Job | Schedule | What it does |
-|---|---|---|
-| `com.tylrcc.trading-cycle` | every 30 min | `run-cycle.sh`: skips if market closed / STOP file / already running; hourly cadence overnight; full strategy cycle otherwise |
-| `com.tylrcc.trading-learning` | daily 8:30 PM local | `run-learning.sh`: reviews journal + realized P&L, appends nightly review, makes up to 2 tactic refinements to STRATEGY.md (never touches risk limits) |
-| `com.tylrcc.trading-keepawake` | always | `caffeinate -i` so scheduled runs are not lost to idle sleep |
+1. **launchd** (survives reboot if user is logged in):
+   - `com.tylrcc.trading-cycle` every 30 min → `run-cycle.sh`
+   - `com.tylrcc.trading-learning` daily 8:30 PM → `run-learning.sh`
+   - `com.tylrcc.trading-keepawake` always → `caffeinate -is`
+2. **In-chat heartbeat** (backup while a Cursor chat is open).
 
-## Stop everything (kill switch)
+Headless `cursor-agent` needs Robinhood MCP already approved for the CLI.
+If cycles fail with auth errors, reconnect once via `cursor-agent mcp list`
+or Cursor Settings → MCP, then leave it.
 
-Fastest: `touch ~/ty/trading-agent/STOP` (all runs skip until removed).
-Full removal:
+## Install / reinstall after path moves
 
 ```bash
-launchctl bootout gui/$(id -u)/com.tylrcc.trading-cycle
-launchctl bootout gui/$(id -u)/com.tylrcc.trading-learning
-launchctl bootout gui/$(id -u)/com.tylrcc.trading-keepawake
+cp ~/ty/projects/trading-agent/com.tylrcc.trading-*.plist ~/Library/LaunchAgents/
+chmod +x ~/ty/projects/trading-agent/run-*.sh
+launchctl bootout gui/$(id -u)/com.tylrcc.trading-cycle 2>/dev/null
+launchctl bootout gui/$(id -u)/com.tylrcc.trading-learning 2>/dev/null
+launchctl bootout gui/$(id -u)/com.tylrcc.trading-keepawake 2>/dev/null
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tylrcc.trading-cycle.plist
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tylrcc.trading-learning.plist
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tylrcc.trading-keepawake.plist
 ```
 
-Also: disconnecting the agent in the Robinhood app instantly revokes all
-trading access regardless of what runs here.
+## Kill switch
+
+```bash
+touch ~/ty/projects/trading-agent/STOP
+```
 
 ## Logs
 
-- `runner.log` — one line per tick (RUN / SKIP reason / exit code)
-- `cycles.log` — full agent output per trading cycle
-- `learning.log` — nightly review output
-- `JOURNAL.md` — the agent's own trade log and reasoning
+- `runner.log`, `cycles.log`, `learning.log`, `JOURNAL.md`
 
-## Limitations / cost
+## Reality check
 
-- The Mac must be powered on with the user logged in; a closed lid on battery
-  still sleeps the machine. Keep it plugged in for true 24/7.
-- Each cycle consumes Cursor plan usage (~35-40 headless runs per weekday at
-  current cadence). To guarantee it never spends beyond the plan, keep
-  usage-based / on-demand pricing OFF in cursor.com dashboard settings; runs
-  then stop instead of billing extra. To lower usage, raise StartInterval in
-  `~/Library/LaunchAgents/com.tylrcc.trading-cycle.plist` (seconds), then
-  `launchctl bootout` + `launchctl bootstrap` the job.
-- Market holidays are hardcoded in run-cycle.sh (update yearly).
+Keep the Mac plugged in. Closed lid on battery still sleeps despite
+caffeinate in some power modes. Chat heartbeat dies when the chat closes;
+launchd is the restart-proof path.

@@ -1,23 +1,22 @@
 #!/bin/zsh
 # Robinhood agentic trading cycle runner. Invoked by launchd every 30 minutes.
-# Decides whether a market session is open before spending any Cursor usage.
+# Hard-timeout so a hung cursor-agent cannot block forever.
 
 set -u
 export PATH="$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin"
 
-DIR="$HOME/ty/trading-agent"
+DIR="$HOME/ty/projects/trading-agent"
 LOG="$DIR/runner.log"
 LOCK="$DIR/.cycle.lock"
+TIMEOUT_SECS=240
 
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S %Z') $1" >> "$LOG"; }
 
-# Kill switch: create trading-agent/STOP to halt all trading.
 if [[ -f "$DIR/STOP" ]]; then
   log "SKIP: STOP file present"
   exit 0
 fi
 
-# Prevent overlapping cycles.
 if [[ -f "$LOCK" ]] && kill -0 "$(cat "$LOCK" 2>/dev/null)" 2>/dev/null; then
   log "SKIP: previous cycle still running (pid $(cat "$LOCK"))"
   exit 0
@@ -25,9 +24,6 @@ fi
 echo $$ > "$LOCK"
 trap 'rm -f "$LOCK"' EXIT
 
-# Market gate (ET). Robinhood 24-hour market: Sun 8 PM - Fri 8 PM ET.
-# Full cycles every 30 min during regular hours (Mon-Fri 9:30-16:00 ET);
-# hourly (minute-zero ticks only) in extended/overnight; skip when closed.
 read -r DOW HOUR MIN <<< "$(TZ=America/New_York date '+%u %H %M')"
 HOUR=${HOUR#0}; MIN=${MIN#0}; MINS=$((HOUR * 60 + MIN))
 
@@ -38,7 +34,6 @@ elif [[ $DOW -le 4 || ( $DOW -eq 5 && $MINS -lt 1200 ) || ( $DOW -eq 7 && $MINS 
   session="overnight"
 fi
 
-# US market holidays (update yearly).
 TODAY=$(TZ=America/New_York date '+%m-%d')
 for h in 01-01 01-19 02-16 04-03 05-25 06-19 07-03 09-07 11-26 12-25; do
   [[ "$TODAY" == "$h" ]] && session="closed"
@@ -56,21 +51,27 @@ fi
 log "RUN: session=$session"
 cd "$HOME/ty"
 
-PROMPT="You are the autonomous trading agent for the Robinhood Agentic account.
-Current session type: $session. Follow /Users/tyler/ty/trading-agent/STRATEGY.md
-and the guardrails in .cursor/rules/robinhood-trading-guardrails.mdc exactly.
-Run ONE trading cycle now: read the tail of trading-agent/JOURNAL.md for state,
-check portfolio/positions/orders via the robinhood-trading MCP, enforce exits
-first, then scan for entries per the strategy (ApeWisdom API + web search;
-direct Reddit JSON is blocked). Log the cycle to JOURNAL.md. Be decisive but
-never violate a guardrail. Do not ask questions; there is no user present."
+PROMPT="You are the autonomous trading agent for the Robinhood Agentic account
+(ending 5851). Session=$session. Follow /Users/tyler/ty/projects/trading-agent/STRATEGY.md
+and .cursor/rules/robinhood-trading-guardrails.mdc exactly.
+Run ONE cycle: read JOURNAL.md tail, check portfolio/positions/orders,
+enforce exits first, then deploy settled cash per the daily mandate
+(affordable names only; fractional all-in in regular hours). Signal via
+ApeWisdom + web search. Log to JOURNAL.md. Be decisive. No questions."
+
+# Kill hung agents after TIMEOUT_SECS.
+(
+  sleep "$TIMEOUT_SECS"
+  pkill -f "cursor-agent.*projects/trading-agent|cursor-agent.*STRATEGY.md" 2>/dev/null || true
+) &
+WATCH=$!
 
 cursor-agent -p --force --approve-mcps --trust --workspace "$HOME/ty" \
   --output-format text "$PROMPT" >> "$DIR/cycles.log" 2>&1
 rc=$?
+kill "$WATCH" 2>/dev/null || true
 log "DONE: exit=$rc"
 
-# Sync everything to the private GitHub repo so the user can watch remotely.
 cp "$HOME/ty/.cursor/rules/robinhood-trading-guardrails.mdc" "$DIR/guardrails-rule.md" 2>/dev/null
 cd "$DIR" && git add -A >/dev/null 2>&1
 if ! git diff --cached --quiet 2>/dev/null; then
