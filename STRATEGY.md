@@ -40,11 +40,21 @@ loss floor so the experiment survives more than one bad day.
   fade), a single momentum print is not enough: the trigger price must hold
   across two consecutive cycles (60 min) before entry. (Added 7/8 after WEN
   8.75 trigger would have lost 11% by Tuesday's close.)
-- Position size: $10-18 per position, max 3 concurrent, keep a cash buffer.
+- Position size (HIGH-RISK mode): one concentrated position, up to 100% of
+  settled cash. No cash buffer required.
+- Daily trade mandate (user, 2026-07-11): aim to put settled cash to work
+  every trading day in the best available candidate rather than sitting idle.
+  Relax the two-cycle confirmation to one cycle during regular hours when
+  settled cash is unspent by 15:00 ET, picking the strongest same-day
+  momentum name that passes the spread rule. The entry bar drops, the exit
+  rules do not.
 - Regular hours (9:30-16:00 ET): fractional dollar-based market orders OK.
 - Outside regular hours: whole-share marketable limit orders only, and only in
   liquid names; skip anything with a bid-ask spread wider than 1%.
-- Cash account: only buy with settled funds. If cash is unsettled, log and wait.
+- Cash account: only buy with settled funds. If cash is unsettled, log and
+  wait. With T+1 settlement, a same-day or next-day exit re-arms the account
+  for a new buy the following day — the daily cadence is: buy with settled
+  cash, exit per rules, next buy once proceeds settle (typically next day).
 
 ## Exit rules (high-risk tuning)
 

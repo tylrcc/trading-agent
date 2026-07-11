@@ -198,3 +198,16 @@ SOXL -2.9%). WEN flat at 7.77, spread 0.77% but velocity fading (60 vs 98
 both catalyst velocity AND positive momentum. Wait for regular hours (9:30 ET)
 for fractional SOXL/MU entries if semis stabilize.
 
+## 2026-07-11 19:40 ET — Loop restart + daily-trade mandate
+
+Loop was down since ~04:12 ET Wed 7/8 (chat session closed; two more
+heartbeat cycles ran that morning after the 03:41 cycle, all NO TRADE).
+Account verified: $53.00 settled cash, no positions, no orders. Market
+closed (Saturday); next session Sunday 7/12 8:00 PM ET.
+
+User mandate added to STRATEGY.md: deploy settled cash every trading day
+into the best qualifying candidate instead of waiting for perfect setups;
+if cash is still unspent by 15:00 ET, take the strongest same-day momentum
+name (one-cycle confirmation, spread rule still applies). Exit rules
+unchanged. Wake timer armed for Sunday 7:55 PM ET.
+
