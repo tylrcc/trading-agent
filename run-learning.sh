@@ -13,10 +13,12 @@ echo "$(date '+%F %T') LEARN: start" >> "$LOG"
 cd "$HOME/ty"
 
 PROMPT="Nightly review for Robinhood Agentic account ending 5851.
-Read /Users/tyler/ty/projects/trading-agent/JOURNAL.md and STRATEGY.md.
-Pull realized P&L via robinhood-trading MCP. Append a Nightly review to
-JOURNAL.md. Make at most TWO tactic refinements to STRATEGY.md (never touch
-risk limits or guardrails). Do not trade. No questions."
+Read /Users/tyler/ty/projects/trading-agent/JOURNAL.md, TRADES.csv, and
+STRATEGY.md. Pull realized P&L via robinhood-trading MCP and reconcile it
+against TRADES.csv (fix any missing rows). Compute win rate and expectancy
+from TRADES.csv. Append a Nightly review to JOURNAL.md. Make at most TWO
+tactic refinements to STRATEGY.md (never touch risk limits or guardrails).
+Do not trade. No questions."
 
 cursor-agent -p --force --approve-mcps --trust --workspace "$HOME/ty" \
   --output-format text "$PROMPT" >> "$DIR/learning.log" 2>&1

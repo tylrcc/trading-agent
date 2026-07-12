@@ -34,9 +34,21 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tylrcc.trading-keepa
 touch ~/ty/projects/trading-agent/STOP
 ```
 
+## Dry-run mode (test without real orders)
+
+```bash
+touch ~/ty/projects/trading-agent/DRYRUN   # cycles review + log, never place
+rm ~/ty/projects/trading-agent/DRYRUN      # back to live
+```
+
+Concept borrowed from openalgo's Analyzer Mode: full pipeline runs against
+live data, order placement is the only step skipped.
+
 ## Logs
 
 - `runner.log`, `cycles.log`, `learning.log`, `JOURNAL.md`
+- `TRADES.csv`: structured fill ledger (one row per entry/exit); the nightly
+  review computes win rate and expectancy from it
 
 ## Reality check
 

@@ -16,7 +16,8 @@ These rules apply whenever any `robinhood-trading` MCP tool is used.
 - ALWAYS call `review_equity_order` before `place_equity_order`. If the review returns any non-empty alert in `order_checks`, do NOT place the order; log the alert to the journal instead.
 - Prefer limit orders (marketable limits) over market orders. Outside regular hours (9:30-16:00 ET), whole-share limit orders only; fractional/dollar orders only during regular hours.
 - Never retry a rejected order with modified parameters to force it through.
-- Log every review, order, fill, and skip decision to `/Users/tyler/ty/projects/trading-agent/JOURNAL.md` with timestamp and reasoning.
+- Log every review, order, fill, and skip decision to `/Users/tyler/ty/projects/trading-agent/JOURNAL.md` with timestamp and reasoning. Additionally append every FILL (entry or exit) as one row to `/Users/tyler/ty/projects/trading-agent/TRADES.csv`.
+- Dry-run mode: if the file `/Users/tyler/ty/projects/trading-agent/DRYRUN` exists, run reviews and log the intended order, but NEVER call `place_equity_order`.
 
 ## Risk limits (HIGH-RISK mode, user-authorized 2026-07-08)
 - The user explicitly chose maximum aggression and accepts total loss of the

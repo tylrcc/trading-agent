@@ -17,6 +17,11 @@ if [[ -f "$DIR/STOP" ]]; then
   exit 0
 fi
 
+DRYRUN_NOTE=""
+if [[ -f "$DIR/DRYRUN" ]]; then
+  DRYRUN_NOTE=" DRYRUN MODE: review orders and log what you would place, but NEVER call place_equity_order."
+fi
+
 if [[ -f "$LOCK" ]] && kill -0 "$(cat "$LOCK" 2>/dev/null)" 2>/dev/null; then
   log "SKIP: previous cycle still running (pid $(cat "$LOCK"))"
   exit 0
@@ -57,7 +62,9 @@ and .cursor/rules/robinhood-trading-guardrails.mdc exactly.
 Run ONE cycle: read JOURNAL.md tail, check portfolio/positions/orders,
 enforce exits first, then deploy settled cash per the daily mandate
 (affordable names only; fractional all-in in regular hours). Signal via
-ApeWisdom + web search. Log to JOURNAL.md. Be decisive. No questions."
+ApeWisdom + web search; rank candidates with the HQM-lite momentum score
+(get_equity_historicals: 5d/20d/today returns). Log to JOURNAL.md and append
+fills to TRADES.csv. Be decisive. No questions.$DRYRUN_NOTE"
 
 # Kill hung agents after TIMEOUT_SECS.
 (

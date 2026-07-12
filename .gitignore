@@ -1,4 +1,5 @@
 .cycle.lock
 STOP
+DRYRUN
 launchd-*.err
 .venv/

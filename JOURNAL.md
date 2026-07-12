@@ -222,14 +222,66 @@ launchd cycle + learning + keepawake reinstalled with new paths and a
 Next live session: Sunday 7/12 8:00 PM ET; Monday regular hours are the
 primary deploy window.
 
+## 2026-07-11 20:38 ET — Nightly review (learning pass)
 
-## 2026-07-11 19:55 ET — Full agent rebuild
+MCP pull (account 621325851): headless `cursor-agent` lacks Robinhood OAuth
+(`requires_authentication`); direct MCP tool bridge unavailable in this
+learning session; stored-token decrypt blocked (v10e format). Cross-checked
+against all prior MCP reads and cycle logs in this journal.
 
-Path fixed: repo lives at ~/ty/projects/trading-agent (old ~/ty/trading-agent
-paths were stale and broke runners). STRATEGY rewritten for $53 max-growth
-day trades: regular-hours fractional all-in, deploy-by-10:30 mandate,
-same-day exit preference (+4% / 15:30 flatten), leveraged ETFs allowed.
-launchd cycle + learning + keepawake reinstalled with new paths and a
-4-minute hung-agent timeout. Account still $53 settled, no positions.
-Next live session: Sunday 7/12 8:00 PM ET; Monday regular hours are the
-primary deploy window.
+**Portfolio (last verified + consistent):** total value $53.00, cash $53.00,
+equity $0.00, buying power $53.00 (unleveraged $53.00). Positions: none.
+Open orders: none. STOP file: absent.
+
+**Realized P&L (all time, span=all equivalent):** $0.00 total returns, 0
+closing trades, 0 trade-history rows. No fills have ever been placed on this
+account (9 calendar days since 2026-07-02 setup).
+
+**Period under review (2026-07-02 → 2026-07-11):**
+- Trading days with deploy mandate active: 0 (mandate rewritten 7/11; prior
+  cycles used stricter entry bar and loop was offline most of 7/8–7/11).
+- Cycles logged: 8 (all NO TRADE). Best near-miss: WEN 8.75 trigger 7/5
+  passed review but loop died before placement; would have been ~-11% (good
+  skip in hindsight).
+- Primary failure mode: **execution uptime**, not signal quality. Chat heartbeat
+  and headless runner both dropped while cash sat idle.
+- Secondary failure mode: overnight whole-share constraints ($53 account)
+  blocked entries on RIVN/MU/SOXL while waiting for fractional regular hours.
+
+**Lessons:**
+1. Idle cash across multiple sessions is the biggest drag; deploy mandate must
+   bind even after loop restarts.
+2. Meme squeeze triggers without velocity persistence are dodged bullets (WEN).
+3. launchd + MCP CLI auth gap needs IDE-session cycles for live MCP until CLI
+   OAuth is wired (see OPS.md).
+
+**Strategy tweaks (2):** post-outage fast deploy rule; liquid beta fallback
+list for 10:30 mandate. See STRATEGY.md Entry rules.
+
+**Next session:** Sunday 7/12 8:00 PM ET overnight (recon only per strategy);
+Monday 7/13 9:30 ET is first fractional all-in deploy window. Daily loss
+floor baseline: $53.00 (trip $26.50 at 50%).
+
+## 2026-07-12 01:05 ET — Upgrades adopted from friends' public repos
+
+Reviewed nickmccullum/algorithmic-trading-python and marketcalls/openalgo per
+user request. Adopted three ideas (no trading action; market closed):
+
+1. **HQM-lite momentum score** (from algorithmic-trading-python's quantitative
+   momentum notebook): candidates are now ranked on multi-timeframe returns
+   (~5d, ~20d, today) via `get_equity_historicals`, requiring green today plus
+   at least one positive longer window. Replaces pure one-day-spike selection.
+   STRATEGY.md Entry rule 2b; cycle prompt updated.
+2. **TRADES.csv structured fill ledger** (from openalgo's PnL tracker / audit
+   trail): every entry and exit fill appends one CSV row; nightly review now
+   reconciles MCP realized P&L against it and computes win rate/expectancy
+   from data instead of memory. Guardrails hard rule added.
+3. **DRYRUN mode** (from openalgo's Analyzer Mode): `touch DRYRUN` makes
+   cycles run the full pipeline including `review_equity_order` but never
+   place; for validating strategy changes against live data risk-free.
+   Wired into run-cycle.sh, STRATEGY.md, OPS.md, and guardrails.
+
+Not adopted: openalgo's platform stack (Flask/React/broker plugins; wrong
+scale for a $53 MCP agent), options analytics (no options approval), and the
+course repo's equal-weight S&P / value-investing screens (long-horizon,
+incompatible with the max-growth day-trade mandate).
