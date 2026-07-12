@@ -306,3 +306,26 @@ intraday-strategy repos and adopted:
    was the root cause of the 7/8-7/11 downtime).
 
 No trades this entry; market closed (Sat night). Next session Sunday 8 PM ET.
+
+## 2026-07-12 19:58 ET — Sunday reopen recon cycle (in-chat)
+
+Account 621325851: total $53.00, cash $53.00, positions none, open orders
+none. STOP/DRYRUN absent. Runner healthy (15-min skips logged all day,
+correctly idle while closed).
+
+Velocity (ApeWisdom): MSFT 85 (+70% vs 24h), SPY 83 (+34%), MU 47 (declining
+from 63), AAPL 16 (+129% small base). No affordable overnight candidate:
+- MSFT $385, MU $983, SOXL $194, TQQQ $77: all > $53 whole-share.
+- TSLL 13.08/17.00 and BITX 11.93/18.00: spreads ~30-50%, fail the 1% rule
+  (Sunday-open quotes still stale/thin).
+
+Decision: NO TRADE (recon only, per plan). Monday 9:30 ET is the deploy
+window: fractional all-in via ORB playbook (range 9:30-9:45, entry
+9:45-11:30 with RVOL >= 1.5x and price > VWAP). Watchlist for the open:
+MSFT (velocity leader, catalyst check pending), SPY/QQQ proxies via TQQQ,
+SOXL if semis reclaim; MU only if selloff reverses (still fading).
+
+Headless MCP auth: still requires_authentication (Saturday's OAuth window
+was never completed). Re-launched `cursor-agent mcp login robinhood-trading`;
+browser tab pending user sign-in. Until done, scheduled cycles run but
+cannot reach Robinhood; in-chat cycles (this one) trade fine.
