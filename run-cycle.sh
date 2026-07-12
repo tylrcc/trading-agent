@@ -48,7 +48,7 @@ if [[ "$session" == "closed" ]]; then
   log "SKIP: market closed"
   exit 0
 fi
-if [[ "$session" == "overnight" && $MIN -ge 30 ]]; then
+if [[ "$session" == "overnight" && $MIN -ge 15 ]]; then
   log "SKIP: overnight session, hourly cadence"
   exit 0
 fi
@@ -60,11 +60,13 @@ PROMPT="You are the autonomous trading agent for the Robinhood Agentic account
 (ending 5851). Session=$session. Follow /Users/tyler/ty/projects/trading-agent/STRATEGY.md
 and .cursor/rules/robinhood-trading-guardrails.mdc exactly.
 Run ONE cycle: read JOURNAL.md tail, check portfolio/positions/orders,
-enforce exits first, then deploy settled cash per the daily mandate
+enforce exits first. Regime check (SPY/VIX) before entries. Then deploy
+settled cash per the ORB playbook (9:45-11:30 ET) and daily mandate
 (affordable names only; fractional all-in in regular hours). Signal via
 ApeWisdom + web search; rank candidates with the HQM-lite momentum score
-(get_equity_historicals: 5d/20d/today returns). Log to JOURNAL.md and append
-fills to TRADES.csv. Be decisive. No questions.$DRYRUN_NOTE"
+(get_equity_historicals: 5d/20d/today returns) and require RVOL >= 1.3x and
+price above session VWAP for regular-hours buys. Log to JOURNAL.md and
+append fills to TRADES.csv. Be decisive. No questions.$DRYRUN_NOTE"
 
 # Kill hung agents after TIMEOUT_SECS.
 (

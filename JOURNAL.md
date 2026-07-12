@@ -285,3 +285,24 @@ Not adopted: openalgo's platform stack (Flask/React/broker plugins; wrong
 scale for a $53 MCP agent), options analytics (no options approval), and the
 course repo's equal-weight S&P / value-investing screens (long-horizon,
 incompatible with the max-growth day-trade mandate).
+
+## 2026-07-12 01:15 ET — Go-fully-live upgrade pass
+
+User mandate: best info, fastest response, best outcomes. Swept top public
+intraday-strategy repos and adopted:
+
+1. **ORB playbook** (sam-bateman/trading-orb, 10-year validated; Concretum/
+   Aziz ORB paper): 15-min opening range, long breakout 9:45-11:30 ET with
+   RVOL >= 1.5x and price > VWAP; stop at opposite range boundary, target
+   1.5x range height, force-flat 15:45.
+2. **RVOL + VWAP confirmation on ALL regular-hours entries** (the trading-orb
+   backtest found breakouts without a volume filter are coin flips).
+3. **SPY/VIX regime check** before entries; defensive mode when VIX > 28 or
+   SPY < -1.5% intraday (adapted from ckithika/joe's regime engine).
+4. **Faster response:** cycle launchd interval 30 min -> 15 min during
+   regular hours (overnight stays hourly via in-script gate).
+5. **Headless auth fix:** ran `cursor-agent mcp login robinhood-trading` so
+   scheduled cycles can reach Robinhood MCP without the IDE chat open (this
+   was the root cause of the 7/8-7/11 downtime).
+
+No trades this entry; market closed (Sat night). Next session Sunday 8 PM ET.
