@@ -90,3 +90,6 @@
 2026-07-12 19:24:37 EDT SKIP: market closed
 2026-07-12 19:39:37 EDT SKIP: market closed
 2026-07-12 19:54:37 EDT SKIP: market closed
+2026-07-12 20:09:38 EDT SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)
+2026-07-12 20:24:39 EDT SKIP: overnight session, hourly cadence
+2026-07-12 20:38:16 LEARN: exit=0
