@@ -329,3 +329,26 @@ Headless MCP auth: still requires_authentication (Saturday's OAuth window
 was never completed). Re-launched `cursor-agent mcp login robinhood-trading`;
 browser tab pending user sign-in. Until done, scheduled cycles run but
 cannot reach Robinhood; in-chat cycles (this one) trade fine.
+
+## 2026-07-12 20:07 ET — Root cause found: single-connection limit. Rewired.
+
+User completed the fresh OAuth attempt and Robinhood returned oauth/error
+again, reporting the app is ALREADY CONNECTED. Conclusion: Robinhood allows
+one active Cursor connection per user; the IDE chat session holds that
+grant, so the headless CLI can never obtain a second one. This is a
+Robinhood-side policy, not a fixable config.
+
+Rewired accordingly:
+- In-chat loop is now the PRIMARY engine: background wake loop pings every
+  15 min in regular hours, hourly overnight (market-hours aware, holiday
+  aware). Chat session already has working MCP auth (verified with live
+  portfolio/quote pulls tonight).
+- launchd run-cycle.sh demoted to watchdog: checks CLI auth first, logs a
+  loud SKIP instead of spawning a doomed agent. Auto-promotes itself back to
+  primary if Robinhood ever grants the CLI its own session.
+- All pending OAuth login attempts killed; no more login prompts for the
+  user. OPS.md updated.
+
+Constraint to respect: keep the Cursor window with this chat open;
+keepawake job handles sleep. No trading action this entry; next cycle on
+the wake loop.

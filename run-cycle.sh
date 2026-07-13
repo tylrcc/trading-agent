@@ -53,6 +53,12 @@ if [[ "$session" == "overnight" && $MIN -ge 15 ]]; then
   exit 0
 fi
 
+# Don't burn a cycle if the CLI has no Robinhood auth; log loudly instead.
+if cursor-agent mcp list 2>/dev/null | grep -q "robinhood-trading: requires_authentication"; then
+  log "SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)"
+  exit 0
+fi
+
 log "RUN: session=$session"
 cd "$HOME/ty"
 

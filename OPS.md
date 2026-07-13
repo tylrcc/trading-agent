@@ -5,15 +5,21 @@ Public: https://github.com/tylrcc/trading-agent
 
 ## How it runs
 
-1. **launchd** (survives reboot if user is logged in):
-   - `com.tylrcc.trading-cycle` every 30 min → `run-cycle.sh`
+1. **In-chat loop (PRIMARY).** Robinhood permits only ONE active Cursor
+   connection per user, and the IDE chat session holds it. Headless
+   `cursor-agent mcp login` is rejected by Robinhood while that grant
+   exists (browser shows oauth/error, "already connected"). So the live
+   trading engine is the chat session: a background wake loop pings the
+   agent every 15 min during regular hours and hourly overnight, and the
+   agent runs a cycle on each wake. Requirement: the Cursor window with the
+   trading chat stays open (keepawake job prevents sleep).
+2. **launchd (WATCHDOG + future backup):**
+   - `com.tylrcc.trading-cycle` every 15 min → `run-cycle.sh`; it checks CLI
+     auth first and logs `SKIP: robinhood MCP needs login` instead of
+     burning a cycle. If Robinhood ever allows a second (CLI) grant, this
+     becomes the restart-proof engine automatically.
    - `com.tylrcc.trading-learning` daily 8:30 PM → `run-learning.sh`
    - `com.tylrcc.trading-keepawake` always → `caffeinate -is`
-2. **In-chat heartbeat** (backup while a Cursor chat is open).
-
-Headless `cursor-agent` needs Robinhood MCP already approved for the CLI.
-If cycles fail with auth errors, reconnect once via `cursor-agent mcp list`
-or Cursor Settings → MCP, then leave it.
 
 ## Install / reinstall after path moves
 
