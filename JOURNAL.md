@@ -352,3 +352,12 @@ Rewired accordingly:
 Constraint to respect: keep the Cursor window with this chat open;
 keepawake job handles sleep. No trading action this entry; next cycle on
 the wake loop.
+
+## 2026-07-12 20:08 ET — Overnight cycle 1 (wake loop live)
+
+Wake loop's first ping fired on schedule. Overnight session open, fresh
+quotes: TSLL 13.01/13.03 (affordable, spread 0.15%, but -0.5% vs close, no
+catalyst), BITX 12.20/12.22 (affordable, +0.25%, no crypto names in
+velocity top 12). TQQQ/SOXL unaffordable whole-share. Entry rules require
+catalyst + momentum; neither qualifies. NO TRADE. Preserving full $53 for
+Monday 9:30 ET ORB deploy window. Next wake ~21:00 ET.
