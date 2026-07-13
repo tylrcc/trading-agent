@@ -361,3 +361,13 @@ catalyst), BITX 12.20/12.22 (affordable, +0.25%, no crypto names in
 velocity top 12). TQQQ/SOXL unaffordable whole-share. Entry rules require
 catalyst + momentum; neither qualifies. NO TRADE. Preserving full $53 for
 Monday 9:30 ET ORB deploy window. Next wake ~21:00 ET.
+
+## 2026-07-12 21:16 ET — Overnight cycle 2
+
+Velocity: MSFT accelerating hard (92 vs 43/24h), SPY 97 (+54%), MU
+re-accelerating (69 vs 52), META +120% small base. All unaffordable
+whole-share overnight. Affordable pair: TSLL 12.90/12.91 now -1.4% vs close
+(fading, would violate momentum rule), BITX 12.19/12.22 flat with no
+catalyst. NO TRADE. MSFT is the standout for Monday's open watchlist:
+velocity leader two cycles running and accelerating; check catalyst
+pre-open and run ORB on it if RVOL confirms.
