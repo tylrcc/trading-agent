@@ -371,3 +371,19 @@ whole-share overnight. Affordable pair: TSLL 12.90/12.91 now -1.4% vs close
 catalyst. NO TRADE. MSFT is the standout for Monday's open watchlist:
 velocity leader two cycles running and accelerating; check catalyst
 pre-open and run ORB on it if RVOL confirms.
+
+## 2026-07-12 22:16 ET — Overnight cycle 3
+
+Velocity: MSFT 95 (vs 39/24h, third straight cycle accelerating), MU 85
+(vs 45, accelerating), SPY 103. MSFT catalyst identified: Bloomberg story
+that Microsoft is routing Excel/Outlook AI prompts to in-house MAI models
+to cut OpenAI/Anthropic costs (margin-improvement narrative; stock -20%
+YTD, earnings 7/29). Overnight MSFT flat at ~384.43 vs 385.10 close: no gap,
+narrative not yet moving price. Affordable names still disqualify: TSLL
+12.78/12.80 (-2.2%, fading harder), BITX 12.00/12.02 (-1.5%, rolled over).
+NO TRADE overnight; both would violate the momentum rule.
+
+Monday open plan: primary ORB candidates MSFT (fractional; needs RVOL >=
+1.5x + break above 9:30-9:45 range high + above VWAP) and MU (same rules,
+re-accelerating velocity). Fallback basket per strategy if neither
+confirms by 10:30. Cash $53.00 settled and ready.
