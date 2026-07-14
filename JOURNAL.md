@@ -422,3 +422,17 @@ Stale loop 541278 aborted (41 bare pings, no JSON prompt). Fixed loop
 MU 432 mentions still #1 but overnight 927 vs 937 close (-1%, fading).
 BITX +0.9% affordable, no catalyst. NO TRADE overnight. Post-outage fast
 deploy binds at Tuesday 9:30 ET regular open.
+
+## 2026-07-14 09:43 ET — MARKET OPEN cycle (ORB range forming)
+
+Account $53 cash, no positions. SPY +0.24% (regime OK, not defensive).
+Opening range partial (9:30-9:43, completes 9:45):
+- SOXL: OR high 188.43 / low 176.79. Now ~177, FADING -6% from open
+  (distribution, skip despite +6.9% vs prior close).
+- TQQQ: OR high 75.21 / low 74.27. Now 74.49, INSIDE range, +2.5% day.
+  Primary ORB watch: long on break above 75.21 with RVOL >= 1.5x + VWAP.
+- MU: +3.2% at 967, unaffordable fractional proxy = SOXL/TQQQ.
+
+NO TRADE yet (9:43, ORB entry window starts 9:45). Next wake ~9:58:
+execute fractional all-in TQQQ if breakout confirms, else SOXL if
+reclaims OR high with volume. Post-outage fast deploy active.

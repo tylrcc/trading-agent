@@ -178,3 +178,41 @@
 2026-07-13 20:32:25 LEARN: start
 2026-07-13 20:32:26 LEARN: exit=0
 2026-07-13 23:55:07 EDT SKIP: overnight session, hourly cadence
+2026-07-14 00:13:46 EDT SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)
+2026-07-14 00:28:46 EDT SKIP: overnight session, hourly cadence
+2026-07-14 00:43:46 EDT SKIP: overnight session, hourly cadence
+2026-07-14 00:58:46 EDT SKIP: overnight session, hourly cadence
+2026-07-14 01:13:48 EDT SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)
+2026-07-14 01:28:48 EDT SKIP: overnight session, hourly cadence
+2026-07-14 01:43:48 EDT SKIP: overnight session, hourly cadence
+2026-07-14 01:58:48 EDT SKIP: overnight session, hourly cadence
+2026-07-14 02:13:49 EDT SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)
+2026-07-14 02:28:50 EDT SKIP: overnight session, hourly cadence
+2026-07-14 02:43:50 EDT SKIP: overnight session, hourly cadence
+2026-07-14 02:58:50 EDT SKIP: overnight session, hourly cadence
+2026-07-14 03:13:51 EDT SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)
+2026-07-14 03:28:51 EDT SKIP: overnight session, hourly cadence
+2026-07-14 03:43:52 EDT SKIP: overnight session, hourly cadence
+2026-07-14 03:58:52 EDT SKIP: overnight session, hourly cadence
+2026-07-14 04:13:53 EDT SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)
+2026-07-14 04:28:53 EDT SKIP: overnight session, hourly cadence
+2026-07-14 04:43:53 EDT SKIP: overnight session, hourly cadence
+2026-07-14 04:58:53 EDT SKIP: overnight session, hourly cadence
+2026-07-14 05:13:55 EDT SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)
+2026-07-14 05:28:55 EDT SKIP: overnight session, hourly cadence
+2026-07-14 05:43:55 EDT SKIP: overnight session, hourly cadence
+2026-07-14 05:58:55 EDT SKIP: overnight session, hourly cadence
+2026-07-14 06:13:56 EDT SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)
+2026-07-14 06:28:56 EDT SKIP: overnight session, hourly cadence
+2026-07-14 06:43:57 EDT SKIP: overnight session, hourly cadence
+2026-07-14 06:58:57 EDT SKIP: overnight session, hourly cadence
+2026-07-14 07:13:58 EDT SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)
+2026-07-14 07:28:58 EDT SKIP: overnight session, hourly cadence
+2026-07-14 07:43:58 EDT SKIP: overnight session, hourly cadence
+2026-07-14 07:58:58 EDT SKIP: overnight session, hourly cadence
+2026-07-14 08:14:00 EDT SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)
+2026-07-14 08:29:00 EDT SKIP: overnight session, hourly cadence
+2026-07-14 08:44:00 EDT SKIP: overnight session, hourly cadence
+2026-07-14 08:59:00 EDT SKIP: overnight session, hourly cadence
+2026-07-14 09:14:01 EDT SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)
+2026-07-14 09:29:01 EDT SKIP: overnight session, hourly cadence
