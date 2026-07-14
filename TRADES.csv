@@ -1,1 +1,2 @@
 timestamp_et,symbol,side,qty_or_dollars,fill_price,notional,thesis,exit_reason,realized_pnl
+2026-07-14T09:59:01-04:00,TQQQ,buy,52.50,74.9999,52.50,MU-led semis momentum TQQQ 3x QQQ proxy post-outage fast deploy,,

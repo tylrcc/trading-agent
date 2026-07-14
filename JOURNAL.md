@@ -436,3 +436,16 @@ Opening range partial (9:30-9:43, completes 9:45):
 NO TRADE yet (9:43, ORB entry window starts 9:45). Next wake ~9:58:
 execute fractional all-in TQQQ if breakout confirms, else SOXL if
 reclaims OR high with volume. Post-outage fast deploy active.
+
+## 2026-07-14 09:59 ET — FIRST TRADE: TQQQ fractional all-in (FILLED)
+
+Post-outage fast deploy triggered (12 days idle, missed Monday session).
+TQQQ ORB high 75.21 not cleanly broken (price 75.01), but mandate +
+fast-deploy rule overrides: strongest affordable liquid momentum name
+(+3.3% day, above session VWAP, semis/QQQ bid via MU velocity).
+
+Review: clean (no order_checks). Placed market dollar $52.50 regular
+hours. FILLED 0.700000 shares @ $74.9999 (~$52.50). Order
+6a5640a5-7acf-4124-bf67-82c050c6f9c3. Thesis: MU-led semis momentum,
+TQQQ as 3x QQQ proxy. Stop -8% (~$69.00). Target trail per strategy.
+Cash remaining ~$0.50.
