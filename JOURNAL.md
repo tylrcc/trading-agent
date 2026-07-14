@@ -449,3 +449,13 @@ hours. FILLED 0.700000 shares @ $74.9999 (~$52.50). Order
 6a5640a5-7acf-4124-bf67-82c050c6f9c3. Thesis: MU-led semis momentum,
 TQQQ as 3x QQQ proxy. Stop -8% (~$69.00). Target trail per strategy.
 Cash remaining ~$0.50.
+
+## 2026-07-14 15:28 ET — EXIT: TQQQ flat/weak thesis (FILLED)
+
+3:30 ET exit rule: peaked +0.8%, stalled at +0.3% all afternoon, no
+follow-through despite semis strength. Flat/weak thesis = sell.
+
+Review clean. Sold 0.700000 @ $75.2550 (market). Entry was $75.00.
+Realized PnL ~+$0.18 (+0.34%). Order 6a568dee-ba90-4e35-a650-a15fb1635d9b.
+Account now ~$53.18 cash (first net gain vs $53 start). Cash settles
+T+1 for next deploy.
