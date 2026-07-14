@@ -7,3 +7,4 @@ For future headless learning/cycle runs to pull live P&L, run once:
 ```bash
 cursor-agent mcp login robinhood-trading
 ```The Electron `safeStorage` probe aborted: system `node` can't load the `electron` module, so that path couldn't decrypt Cursor's stored Robinhood OAuth tokens. It wasn't needed for the review; the journal cross-check was enough for account state and P&L.
+Error: [unavailable] getaddrinfo ENOTFOUND api2.cursor.sh
