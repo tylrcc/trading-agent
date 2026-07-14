@@ -414,3 +414,11 @@ BITX +0.9% (green, 0.09% spread, no catalyst in velocity top 12). NO
 TRADE overnight; weak BITX momentum without catalyst is not deploy-worthy.
 Preserve $53 for Tuesday 9:30 fast-deploy ORB on MU (primary: semis
 velocity leader) or MSFT/QQQ proxy via TQQQ fallback basket.
+
+## 2026-07-14 00:03 ET — Overnight cycle (fixed wake loop, cycle 2)
+
+Stale loop 541278 aborted (41 bare pings, no JSON prompt). Fixed loop
+541280 confirmed live with prompt payload. Account $53 cash, no positions.
+MU 432 mentions still #1 but overnight 927 vs 937 close (-1%, fading).
+BITX +0.9% affordable, no catalyst. NO TRADE overnight. Post-outage fast
+deploy binds at Tuesday 9:30 ET regular open.
