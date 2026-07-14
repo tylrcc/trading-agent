@@ -6,13 +6,13 @@ Public: https://github.com/tylrcc/trading-agent
 ## How it runs
 
 1. **In-chat loop (PRIMARY).** Robinhood permits only ONE active Cursor
-   connection per user, and the IDE chat session holds it. Headless
-   `cursor-agent mcp login` is rejected by Robinhood while that grant
-   exists (browser shows oauth/error, "already connected"). So the live
-   trading engine is the chat session: a background wake loop pings the
-   agent every 15 min during regular hours and hourly overnight, and the
-   agent runs a cycle on each wake. Requirement: the Cursor window with the
-   trading chat stays open (keepawake job prevents sleep).
+   connection per user; the IDE chat session holds it. Headless
+   `cursor-agent` cannot obtain a second grant (Robinhood returns
+   oauth/error). Trading runs through this chat via `run-wake-loop.sh`,
+   which emits `AGENT_LOOP_WAKE_rhtrading` lines with a JSON `prompt`
+   payload every 15 min (regular) / hourly (overnight). The agent must
+   execute that prompt on each wake. Requirement: keep this Cursor chat
+   open; keepawake job prevents sleep.
 2. **launchd (WATCHDOG + future backup):**
    - `com.tylrcc.trading-cycle` every 15 min → `run-cycle.sh`; it checks CLI
      auth first and logs `SKIP: robinhood MCP needs login` instead of
@@ -33,6 +33,21 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tylrcc.trading-cycle
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tylrcc.trading-learning.plist
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tylrcc.trading-keepawake.plist
 ```
+
+## Start / restart the in-chat wake loop
+
+Run from a Cursor agent session (not launchd; needs chat MCP auth):
+
+```bash
+# stop any old loop first
+pkill -f run-wake-loop.sh 2>/dev/null
+# arm new loop (agent starts this with notify_on_output on AGENT_LOOP_WAKE_rhtrading)
+~/ty/projects/trading-agent/run-wake-loop.sh
+```
+
+Each wake line includes a JSON `prompt` field. The agent must execute that
+prompt on every wake. If wakes fire but no JOURNAL entries appear, the chat
+is not processing notifications: reopen this chat and say "run cycle".
 
 ## Kill switch
 

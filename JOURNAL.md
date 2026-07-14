@@ -387,3 +387,30 @@ Monday open plan: primary ORB candidates MSFT (fractional; needs RVOL >=
 1.5x + break above 9:30-9:45 range high + above VWAP) and MU (same rules,
 re-accelerating velocity). Fallback basket per strategy if neither
 confirms by 10:30. Cash $53.00 settled and ready.
+
+## 2026-07-13 — FAILURE: entire Monday regular session missed
+
+Wake loop fired 20+ pings (09:35-15:36 ET per terminal log) but the agent
+never executed cycles: wakes lacked the JSON `prompt` payload required by
+the loop skill, so notifications had no actionable instruction. Journal
+stale since 7/12 22:16. Account still $53.00 cash, zero fills, 12 calendar
+days idle. launchd runner correctly skipped (no CLI auth).
+
+FIX applied 7/13 ~midnight ET:
+- Replaced bare `AGENT_LOOP_WAKE_rhtrading` pings with
+  `run-wake-loop.sh` that embeds the full cycle prompt as JSON on every
+  wake (per Cursor loop skill).
+- Killed stale wake loop + hung headless cursor-agent processes.
+- Tuesday 9:30 ET: post-outage fast deploy MANDATORY (skip two-cycle
+  waits; fractional all-in on best ORB/MU/MSFT candidate).
+
+## 2026-07-14 00:03 ET — Fix verification cycle (overnight)
+
+Account: $53.00 cash, no positions. Velocity exploded: MU 432 (+300% vs
+24h, #1), SPY 398, MSFT 251, QQQ 159, SNDK 143 (new). MU closed +0.5%
+Monday at 937 but overnight fading to 927 (-1%). MSFT held gains (+1.5%
+from Fri close, flat overnight). Affordable overnight: TSLL -0.6% (fade),
+BITX +0.9% (green, 0.09% spread, no catalyst in velocity top 12). NO
+TRADE overnight; weak BITX momentum without catalyst is not deploy-worthy.
+Preserve $53 for Tuesday 9:30 fast-deploy ORB on MU (primary: semis
+velocity leader) or MSFT/QQQ proxy via TQQQ fallback basket.
