@@ -93,6 +93,10 @@ Profitable" paper. Rules:
    hours** old and at least one regular session has opened since, skip
    extended meme-trigger / two-cycle waits on the first cycle back. Go
    straight to the daily deploy mandate logic (including fallback basket).
+   Mandate and fast-deploy may skip ORB timing and meme two-cycle waits,
+   but **never** skip rule 2a (RVOL >= 1.3x and above VWAP). If no name
+   passes 2a by 10:30, use the fallback basket and log which ORB/mandate
+   candidates failed volume/VWAP.
 5. **Meme-fade rule.** If mention velocity is already declining from its
    peak, require the trigger print to hold across two cycles (60 min) unless
    the daily deploy mandate has already fired (mandate wins after 10:30 ET).
@@ -106,6 +110,8 @@ Profitable" paper. Rules:
 
 - **Same-day preference:** if up >= +4% by 14:30 ET, sell (free cash to settle
   for tomorrow's deploy). If flat/weak thesis by 15:30 ET, sell.
+- **Midday scratch:** on a day-trade, if the position peaked below +1.5% and
+  is below +0.5% by 14:00 ET, sell on the next cycle (do not wait for 15:30).
 - **Stop:** -8% from entry during regular hours (tighter for day trades);
   -12% if holding overnight.
 - **Trail:** once up >10%, trail -6% from high-water mark.

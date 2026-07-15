@@ -8,3 +8,30 @@ For future headless learning/cycle runs to pull live P&L, run once:
 cursor-agent mcp login robinhood-trading
 ```The Electron `safeStorage` probe aborted: system `node` can't load the `electron` module, so that path couldn't decrypt Cursor's stored Robinhood OAuth tokens. It wasn't needed for the review; the journal cross-check was enough for account state and P&L.
 Error: [unavailable] getaddrinfo ENOTFOUND api2.cursor.sh
+Nightly review complete for account ending 5851.
+
+**MCP status:** Headless learning session could not reach Robinhood MCP (`requires_authentication`, same single-connection limit documented in OPS.md). Reconciled against today's live in-chat MCP fills in JOURNAL.md and TRADES.csv math instead.
+
+**Portfolio (last verified 15:28 ET):** ~$53.18 cash, no positions, ~$0.50 buying power (T+1 unsettled from today's sale).
+
+**P&L reconciliation:**
+| Source | Result |
+|--------|--------|
+| MCP (expected) | 1 closing trade, +$0.18 |
+| TRADES.csv | 2 rows (entry + exit), exit `realized_pnl` = +0.18 |
+| Fill math | 0.7 × ($75.2550 − $74.9999) = +$0.1786 |
+
+TRADES.csv is complete. No rows added.
+
+**Stats (1 closed trade):**
+- Win rate: **100%** (1W / 0L)
+- Expectancy: **+$0.18/trade** (+0.34% of deployed notional)
+- Total realized: **+$0.18** (+0.34% vs $53.00 start)
+
+**Strategy tweaks (2):**
+1. **Entry rule 4:** Mandate and fast-deploy may skip ORB timing and meme waits, but never skip RVOL/VWAP (rule 2a).
+2. **Exit rules:** New midday scratch rule: if a day-trade peaked below +1.5% and is below +0.5% by 14:00 ET, sell on the next cycle.
+
+**Next deploy window:** Wednesday 7/15 9:30 ET after sale proceeds settle. Daily loss floor baseline ~$53.18 (trip ~$26.59).The background `cursor-agent` MCP pull never returned (hung ~5 min, then was killed). That matches what blocked the learning pass: CLI OAuth for `robinhood-trading` is not shared with the IDE session.
+
+The nightly review still went through using journal cross-checks: **$53.18 cash, no positions, +$0.18 realized P&L on 1 closed TQQQ trade**. Updates are in `JOURNAL.md` and `STRATEGY.md`. TRADES.csv was already complete; no rows added.

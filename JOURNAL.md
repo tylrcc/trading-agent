@@ -459,3 +459,51 @@ Review clean. Sold 0.700000 @ $75.2550 (market). Entry was $75.00.
 Realized PnL ~+$0.18 (+0.34%). Order 6a568dee-ba90-4e35-a650-a15fb1635d9b.
 Account now ~$53.18 cash (first net gain vs $53 start). Cash settles
 T+1 for next deploy.
+
+## 2026-07-14 20:38 ET — Nightly review (learning pass)
+
+MCP pull (account 621325851): headless `cursor-agent` learning session
+lacks Robinhood OAuth (`requires_authentication`; same single-connection
+limit as OPS.md). Direct MCP unavailable here. Cross-checked against
+today's live MCP cycle entries (09:59 entry, 15:28 exit) and fill math.
+
+**Portfolio (last verified via in-chat MCP, 15:28 ET):** total value
+~$53.18, cash ~$53.18, equity $0.00, buying power ~$0.50 (T+1 unsettled
+from sale; spendable settled cash ~$0.50 until Wednesday open). Positions:
+none. Open orders: none. STOP/DRYRUN: absent.
+
+**Realized P&L (span=all, reconciled):** +$0.18 total on 1 closing trade
+(TQQQ round trip). MCP `get_realized_pnl` / `get_pnl_trade_history` not
+reachable this session; journal fill prices confirm: 0.7 sh × ($75.2550 −
+$74.9999) = +$0.1786 ≈ +$0.18 (+0.34% on ~$52.50 deployed).
+
+**TRADES.csv reconciliation:** 2 rows (1 entry, 1 exit). Matches journal
+and broker fills. No missing rows added. Exit row realized_pnl +0.18
+aligns with computed round-trip.
+
+**Stats (from TRADES.csv, 1 closed trade):**
+- Win rate: 100% (1W / 0L)
+- Expectancy: +$0.18/trade (+0.34% of deployed notional)
+- Total realized: +$0.18 vs $53.00 start → account +0.34%
+
+**Period under review (2026-07-11 → 2026-07-14):**
+- First live round trip after 12 calendar days idle and missed 7/13 session.
+- Deploy path: post-outage fast deploy + 10:30 mandate → TQQQ fractional
+  all-in without clean ORB break (75.01 vs OR high 75.21).
+- Outcome: scratch win; peaked +0.8%, 15:30 flat/weak exit at +0.34%.
+- Thesis partially right (semis bid) but no afternoon follow-through.
+- Execution uptime fixed (wake loop JSON prompt); first profitable day.
+
+**Lessons:**
+1. Mandate/fast-deploy entries that skip ORB timing still need RVOL/VWAP;
+   sub-breakout TQQQ entry stalled after open.
+2. Midday stall below +0.5% after a sub-1.5% peak is a scratch; earlier
+   exit preserves capital and attention for the next deploy.
+3. T+1 settlement after same-day sale blocks redeploy until next open;
+   plan Wednesday 9:30 ET as next deploy window.
+
+**Strategy tweaks (2):** mandate cannot skip RVOL/VWAP; 14:00 scratch exit
+for stalled day-trades. See STRATEGY.md Entry rule 4 and Exit rules.
+
+**Next session:** Wednesday 2026-07-15 9:30 ET (sale proceeds settle
+overnight). Daily loss floor baseline: ~$53.18 (trip ~$26.59 at 50%).
