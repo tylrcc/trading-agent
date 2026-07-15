@@ -8,11 +8,12 @@ Public: https://github.com/tylrcc/trading-agent
 1. **In-chat loop (PRIMARY).** Robinhood permits only ONE active Cursor
    connection per user; the IDE chat session holds it. Headless
    `cursor-agent` cannot obtain a second grant (Robinhood returns
-   oauth/error). Trading runs through this chat via `run-wake-loop.sh`,
-   which emits `AGENT_LOOP_WAKE_rhtrading` lines with a JSON `prompt`
-   payload every 15 min (regular) / hourly (overnight). The agent must
-   execute that prompt on each wake. Requirement: keep this Cursor chat
-   open; keepawake job prevents sleep.
+   oauth/error). **Never run `cursor-agent mcp login robinhood-trading`
+   while this chat is connected.** Trading runs through this chat via
+   `run-wake-loop.sh`, which emits `AGENT_LOOP_WAKE_rhtrading` lines with
+   a JSON `prompt` payload every 15 min (regular) / hourly (overnight).
+   The agent must execute that prompt on each wake. Requirement: keep
+   this Cursor chat open; keepawake job prevents sleep.
 2. **launchd (WATCHDOG + future backup):**
    - `com.tylrcc.trading-cycle` every 15 min → `run-cycle.sh`; it checks CLI
      auth first and logs `SKIP: robinhood MCP needs login` instead of

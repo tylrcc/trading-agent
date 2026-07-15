@@ -507,3 +507,15 @@ for stalled day-trades. See STRATEGY.md Entry rule 4 and Exit rules.
 
 **Next session:** Wednesday 2026-07-15 9:30 ET (sale proceeds settle
 overnight). Daily loss floor baseline: ~$53.18 (trip ~$26.59 at 50%).
+
+## 2026-07-15 14:08 ET — Agent restarted; deploy blocked by suitability
+
+Wake loop was dead after chat stop; restarted (PID via run-wake-loop.sh).
+Keepawake + launchd cycle loaded. STOP/DRYRUN absent. Chat MCP OK
+(no re-login). Account $53.18 cash, buying power $53.18 (settled), flat.
+
+Past 10:30 mandate: MU velocity #1 but -7% (skip fade). SOXL/TQQQ red.
+Fallback green: BITX +1.3%, TSLL +1.1%. Reviewed BITX, TSLL, SPY, TQQQ —
+ALL returned non-empty order_checks: EQUITY_SUITABILITY
+(INDIVIDUAL). Guardrails: do not place. Logged skips, cash remains idle
+until broker clears suitability or user overrides guardrails.

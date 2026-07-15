@@ -53,9 +53,11 @@ if [[ "$session" == "overnight" && $MIN -ge 15 ]]; then
   exit 0
 fi
 
-# Don't burn a cycle if the CLI has no Robinhood auth; log loudly instead.
+# NEVER call `cursor-agent mcp login`. Robinhood allows ONE Cursor connection;
+# the IDE chat already holds it. Headless login opens a browser oauth/error and
+# can kick the live session. If CLI has no auth, skip quietly (watchdog only).
 if cursor-agent mcp list 2>/dev/null | grep -q "robinhood-trading: requires_authentication"; then
-  log "SKIP: robinhood MCP needs login (run: cursor-agent mcp login robinhood-trading)"
+  log "SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)"
   exit 0
 fi
 
