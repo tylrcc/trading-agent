@@ -56,6 +56,14 @@ is not processing notifications: reopen this chat and say "run cycle".
 touch ~/ty/projects/trading-agent/STOP
 ```
 
+## Pause until a date (e.g. usage-limit cooldown)
+
+```bash
+echo 2026-08-07 > ~/ty/projects/trading-agent/PAUSE_UNTIL
+# cycles and wake loop skip until that ET calendar day; file auto-deletes then
+rm ~/ty/projects/trading-agent/PAUSE_UNTIL   # resume early
+```
+
 ## Dry-run mode (test without real orders)
 
 ```bash

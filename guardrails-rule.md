@@ -18,6 +18,7 @@ These rules apply whenever any `robinhood-trading` MCP tool is used.
 - Never retry a rejected order with modified parameters to force it through.
 - Log every review, order, fill, and skip decision to `/Users/tyler/ty/projects/trading-agent/JOURNAL.md` with timestamp and reasoning. Additionally append every FILL (entry or exit) as one row to `/Users/tyler/ty/projects/trading-agent/TRADES.csv`.
 - Dry-run mode: if the file `/Users/tyler/ty/projects/trading-agent/DRYRUN` exists, run reviews and log the intended order, but NEVER call `place_equity_order`.
+- Pause mode: if `/Users/tyler/ty/projects/trading-agent/PAUSE_UNTIL` exists and today's ET date is strictly before the date written in that file (YYYY-MM-DD), do not trade and do not run cycles. On or after that date, delete the file and resume.
 
 ## Risk limits (HIGH-RISK mode, user-authorized 2026-07-08)
 - The user explicitly chose maximum aggression and accepts total loss of the

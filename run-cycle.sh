@@ -17,6 +17,17 @@ if [[ -f "$DIR/STOP" ]]; then
   exit 0
 fi
 
+if [[ -f "$DIR/PAUSE_UNTIL" ]]; then
+  pause_until=$(tr -d '[:space:]' < "$DIR/PAUSE_UNTIL")
+  today=$(TZ=America/New_York date '+%Y-%m-%d')
+  if [[ "$today" < "$pause_until" ]]; then
+    log "SKIP: paused until $pause_until (today=$today)"
+    exit 0
+  fi
+  rm -f "$DIR/PAUSE_UNTIL"
+  log "RESUME: PAUSE_UNTIL reached ($pause_until); file removed"
+fi
+
 DRYRUN_NOTE=""
 if [[ -f "$DIR/DRYRUN" ]]; then
   DRYRUN_NOTE=" DRYRUN MODE: review orders and log what you would place, but NEVER call place_equity_order."

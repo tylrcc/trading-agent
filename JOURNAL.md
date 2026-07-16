@@ -534,6 +534,21 @@ TQQQ ~-2%, SPY slight red. Velocity: MU #1 (854). Reviewed SPY + TQQQ:
 both still EQUITY_SUITABILITY (INDIVIDUAL). Guardrails: do not place.
 ORB window 9:45 if reviews clear; otherwise idle again.
 
+## 2026-07-16 15:05 ET — PAUSED until 2026-08-07 (Cursor usage limit)
+
+User hit Cursor monthly usage limit (~resets with billing cycle). Requested
+pause of this chat / trading agent until August 7, then resume.
+
+Actions:
+- Stopped run-wake-loop.sh (no more 15-min wakes burning quota).
+- Created PAUSE_UNTIL=2026-08-07; run-cycle.sh and wake loop honor it;
+  guardrails updated.
+- Armed one-shot resume wake for Fri 2026-08-07 09:31 ET: delete pause,
+  restart wake loop, run post-outage fast deploy cycle.
+- Account left flat at $53.18; no open positions. Do not trade until then.
+
+To resume early: delete PAUSE_UNTIL and say "resume trading" in this chat.
+
 ## 2026-07-15 20:38 ET — Nightly review (learning pass)
 
 MCP pull (account 621325851): Robinhood MCP unavailable in this learning

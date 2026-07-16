@@ -7,7 +7,23 @@ export PATH="/usr/local/bin:/usr/bin:/bin"
 
 PROMPT='Run ONE Robinhood Agentic trading cycle (account ending 5851). Read JOURNAL.md tail and STRATEGY.md. Check portfolio/positions/orders via MCP. Enforce exits first. Regime check (SPY/VIX). Deploy settled cash per ORB playbook and daily mandate. Signal via ApeWisdom + web search. HQM-lite score, RVOL >= 1.3x, above VWAP for regular-hours buys. Log JOURNAL.md + TRADES.csv on fills. If >36h since last journal entry or a full regular session was missed, use post-outage fast deploy. Be decisive. No questions.'
 
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
 while true; do
+  if [[ -f "$DIR/STOP" ]]; then
+    sleep 900
+    continue
+  fi
+  if [[ -f "$DIR/PAUSE_UNTIL" ]]; then
+    pause_until=$(tr -d '[:space:]' < "$DIR/PAUSE_UNTIL")
+    today=$(TZ=America/New_York date '+%Y-%m-%d')
+    if [[ "$today" < "$pause_until" ]]; then
+      sleep 3600
+      continue
+    fi
+    rm -f "$DIR/PAUSE_UNTIL"
+  fi
+
   read -r DOW HOUR MIN <<< "$(TZ=America/New_York date '+%u %H %M')"
   HOUR=${HOUR#0}; MIN=${MIN#0}; MINS=$((HOUR * 60 + MIN))
   TODAY=$(TZ=America/New_York date '+%m-%d')
