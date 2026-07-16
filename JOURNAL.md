@@ -527,6 +527,13 @@ Repeated EQUITY_SUITABILITY on BITX/TSLL/SPY/TQQQ all afternoon; no
 override. Overnight: recon only. Next deploy attempt: Thu 7/16 if reviews
 clear.
 
+## 2026-07-16 09:24 ET — Open arming; suitability still blocks
+
+Account $53.18 cash, flat, BP settled. Pre-market: SOXL ~-9%, MU ~-4%,
+TQQQ ~-2%, SPY slight red. Velocity: MU #1 (854). Reviewed SPY + TQQQ:
+both still EQUITY_SUITABILITY (INDIVIDUAL). Guardrails: do not place.
+ORB window 9:45 if reviews clear; otherwise idle again.
+
 ## 2026-07-15 20:38 ET — Nightly review (learning pass)
 
 MCP pull (account 621325851): Robinhood MCP unavailable in this learning
