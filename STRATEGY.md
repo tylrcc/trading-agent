@@ -93,10 +93,13 @@ Profitable" paper. Rules:
    hours** old and at least one regular session has opened since, skip
    extended meme-trigger / two-cycle waits on the first cycle back. Go
    straight to the daily deploy mandate logic (including fallback basket).
-   Mandate and fast-deploy may skip ORB timing and meme two-cycle waits,
-   but **never** skip rule 2a (RVOL >= 1.3x and above VWAP). If no name
-   passes 2a by 10:30, use the fallback basket and log which ORB/mandate
-   candidates failed volume/VWAP.
+   Same bind applies if **no cycle has logged by 9:40 ET** on a regular
+   session (wake loop dead): on the first cycle that fires after 9:40,
+   treat as post-outage and run deploy mandate immediately (do not wait
+   for the next day's open). Mandate and fast-deploy may skip ORB timing
+   and meme two-cycle waits, but **never** skip rule 2a (RVOL >= 1.3x and
+   above VWAP). If no name passes 2a by 10:30, use the fallback basket and
+   log which ORB/mandate candidates failed volume/VWAP.
 5. **Meme-fade rule.** If mention velocity is already declining from its
    peak, require the trigger print to hold across two cycles (60 min) unless
    the daily deploy mandate has already fired (mandate wins after 10:30 ET).
@@ -105,6 +108,12 @@ Profitable" paper. Rules:
    fees/rounding). Outside regular hours: whole-share limit at ask, GFD,
    all_day_hours / extended as allowed; skip if spread > 1%.
 7. ALWAYS `review_equity_order` first. Non-empty `order_checks` = do not place.
+8. **Suitability canary (regular sessions only).** At the first deploy
+   attempt each regular session (by 9:35 ET if possible), review a minimal
+   dollar SPY buy (~$1). If `order_checks` contains `EQUITY_SUITABILITY`,
+   log "broker suitability block" and **skip all new entry reviews for the
+   rest of that session** (recon and exits only). Do not re-review other
+   symbols the same day; the block is account-level, not ticker-specific.
 
 ## Exit rules (day-trade biased)
 
@@ -138,8 +147,10 @@ strategy changes for a session without risking cash.
 ## Cycle checklist
 
 1. Read JOURNAL.md tail (positions, settled cash, daily loss trip, STOP,
-   DRYRUN).
-2. MCP: portfolio, positions, open orders. Enforce exits first.
+   DRYRUN). On regular sessions: if no cycle logged today and clock is
+   past 9:40 ET, flag post-outage fast deploy (Entry rule 4).
+2. MCP: portfolio, positions, open orders. Enforce exits first. Run
+   suitability canary (Entry rule 8) before any new entry review.
 3. Regime check (SPY/VIX). Scan velocity + news. Shortlist 2 candidates that
    are **affordable now**.
 4. Quotes + historicals + entry rules (HQM-lite score, RVOL >= 1.3x, above

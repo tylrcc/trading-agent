@@ -519,3 +519,62 @@ Fallback green: BITX +1.3%, TSLL +1.1%. Reviewed BITX, TSLL, SPY, TQQQ —
 ALL returned non-empty order_checks: EQUITY_SUITABILITY
 (INDIVIDUAL). Guardrails: do not place. Logged skips, cash remains idle
 until broker clears suitability or user overrides guardrails.
+
+## 2026-07-15 16:03 ET — Session close
+
+Regular session ended. Account still $53.18 cash, 0 positions, 0 fills.
+Repeated EQUITY_SUITABILITY on BITX/TSLL/SPY/TQQQ all afternoon; no
+override. Overnight: recon only. Next deploy attempt: Thu 7/16 if reviews
+clear.
+
+## 2026-07-15 20:38 ET — Nightly review (learning pass)
+
+MCP pull (account 621325851): Robinhood MCP unavailable in this learning
+session (`requires_authentication`; interactive auth not supported in agent
+environment; same single-connection limit as OPS.md). Cross-checked against
+in-chat MCP cycle entries (7/14 fills, 7/15 portfolio reads) and TRADES.csv
+fill math.
+
+**Portfolio (last verified via in-chat MCP, 16:03 ET):** total value
+$53.18, cash $53.18, equity $0.00, buying power $53.18 (T+1 sale proceeds
+settled). Positions: none. Open orders: none. STOP/DRYRUN: absent.
+
+**Realized P&L (span=all, reconciled):** +$0.18 total on 1 closing trade
+(TQQQ round trip 2026-07-14). Expected MCP result matches journal fills:
+0.7 sh × ($75.2550 − $74.9999) = +$0.1786 ≈ +$0.18 (+0.34% on ~$52.50
+deployed). No new fills on 2026-07-15.
+
+**TRADES.csv reconciliation:** 2 rows (1 entry, 1 exit). Matches journal
+and broker fills. No missing rows added. Exit row realized_pnl +0.18
+aligns with computed round-trip.
+
+**Stats (from TRADES.csv, 1 closed trade):**
+- Win rate: 100% (1W / 0L)
+- Expectancy: +$0.18/trade (+0.34% of deployed notional)
+- Avg win: +$0.18; avg loss: n/a (0 losses)
+- Total realized: +$0.18 vs $53.00 start → account +0.34%
+
+**Period under review (2026-07-14 → 2026-07-15):**
+- TQQQ scratch win (+0.34%) closed 7/14; proceeds settled 7/15 morning.
+- 7/15 deploy failure: wake loop dead until 14:08 ET (missed 9:30 ORB and
+  10:30 mandate window entirely). After restart, every reviewed symbol
+  (BITX, TSLL, SPY, TQQQ) returned EQUITY_SUITABILITY (INDIVIDUAL) in
+  order_checks; guardrails blocked all placements. Cash idle second
+  consecutive deploy day.
+- Primary failure modes: (1) **execution uptime** (loop offline 9:30-14:08),
+  (2) **broker suitability gate** (account-level block, not symbol-specific).
+
+**Lessons:**
+1. A dead wake loop during the open is equivalent to a missed session; the
+   9:40 ET uptime bind must fire before ORB, not after lunch.
+2. EQUITY_SUITABILITY on SPY means the account cannot trade equities today;
+   repeating reviews on leveraged names wastes cycles and logs noise.
+3. Suitability blocks are outside strategy control; preserve cash and retry
+   next session rather than hammering reviews.
+
+**Strategy tweaks (2):** 9:40 ET uptime bind; suitability canary + session
+lockout. See STRATEGY.md Entry rule 4 and Cycle checklist.
+
+**Next session:** Thursday 2026-07-16 9:30 ET (run suitability canary at
+9:35 before deploy mandate). Daily loss floor baseline: $53.18 (trip
+~$26.59 at 50%).

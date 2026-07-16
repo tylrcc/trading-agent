@@ -35,3 +35,33 @@ TRADES.csv is complete. No rows added.
 **Next deploy window:** Wednesday 7/15 9:30 ET after sale proceeds settle. Daily loss floor baseline ~$53.18 (trip ~$26.59).The background `cursor-agent` MCP pull never returned (hung ~5 min, then was killed). That matches what blocked the learning pass: CLI OAuth for `robinhood-trading` is not shared with the IDE session.
 
 The nightly review still went through using journal cross-checks: **$53.18 cash, no positions, +$0.18 realized P&L on 1 closed TQQQ trade**. Updates are in `JOURNAL.md` and `STRATEGY.md`. TRADES.csv was already complete; no rows added.
+Nightly review complete for account ending 5851.
+
+**MCP status:** Robinhood MCP unavailable in this session (`requires_authentication`; agent environment cannot run interactive OAuth). Reconciled against in-chat MCP journal entries and TRADES.csv math instead.
+
+**Portfolio (last verified 16:03 ET):** $53.18 cash, no positions, settled buying power $53.18.
+
+**P&L reconciliation:**
+
+| Source | Result |
+|--------|--------|
+| Expected MCP | 1 closing trade, +$0.18 |
+| TRADES.csv | 2 rows (entry + exit), exit `realized_pnl` = +0.18 |
+| Fill math | 0.7 × ($75.2550 − $74.9999) = +$0.1786 |
+
+TRADES.csv is complete. No rows added (no new fills since 7/14).
+
+**Stats (1 closed trade):**
+- Win rate: **100%** (1W / 0L)
+- Expectancy: **+$0.18/trade** (+0.34% of deployed notional)
+- Total realized: **+$0.18** (+0.34% vs $53.00 start)
+
+**Period highlights (7/14–7/15):**
+- TQQQ scratch win closed 7/14; proceeds settled 7/15.
+- 7/15 deploy failed twice: wake loop dead until 14:08 (missed ORB + 10:30 mandate), then `EQUITY_SUITABILITY` blocked BITX/TSLL/SPY/TQQQ all afternoon.
+
+**Strategy tweaks (2):**
+1. **Entry rule 4:** 9:40 ET uptime bind — if no cycle logged by 9:40 on a regular session, first cycle back runs post-outage fast deploy immediately.
+2. **Entry rule 8:** Suitability canary — review ~$1 SPY at first deploy attempt; if `EQUITY_SUITABILITY` fires, skip all new entry reviews for the rest of the session.
+
+**Next deploy window:** Thursday 7/16 9:30 ET (suitability canary at 9:35). Daily loss floor baseline $53.18 (trip ~$26.59).

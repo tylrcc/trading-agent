@@ -334,3 +334,28 @@
 2026-07-15 13:57:04 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
 2026-07-15 14:06:52 EDT RUN: session=regular
 2026-07-15 14:10:53 EDT DONE: exit=143
+2026-07-15 14:25:56 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-07-15 14:40:57 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-07-15 14:55:58 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-07-15 15:11:00 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-07-15 15:26:02 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-07-15 15:41:03 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-07-15 15:56:05 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-07-15 16:11:06 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-07-15 16:26:07 EDT SKIP: overnight session, hourly cadence
+2026-07-15 16:41:07 EDT SKIP: overnight session, hourly cadence
+2026-07-15 16:56:07 EDT SKIP: overnight session, hourly cadence
+2026-07-15 17:11:08 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-07-15 17:26:08 EDT SKIP: overnight session, hourly cadence
+2026-07-15 17:41:08 EDT SKIP: overnight session, hourly cadence
+2026-07-15 17:56:09 EDT SKIP: overnight session, hourly cadence
+2026-07-15 18:33:08 EDT SKIP: overnight session, hourly cadence
+2026-07-15 18:48:08 EDT SKIP: overnight session, hourly cadence
+2026-07-15 19:03:10 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-07-15 19:18:10 EDT SKIP: overnight session, hourly cadence
+2026-07-15 19:40:44 EDT SKIP: overnight session, hourly cadence
+2026-07-15 19:55:44 EDT SKIP: overnight session, hourly cadence
+2026-07-15 20:10:46 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-07-15 20:25:46 EDT SKIP: overnight session, hourly cadence
+2026-07-15 20:30:05 LEARN: start
+2026-07-15 20:30:45 LEARN: exit=0
