@@ -65,3 +65,6 @@ TRADES.csv is complete. No rows added (no new fills since 7/14).
 2. **Entry rule 8:** Suitability canary — review ~$1 SPY at first deploy attempt; if `EQUITY_SUITABILITY` fires, skip all new entry reviews for the rest of the session.
 
 **Next deploy window:** Thursday 7/16 9:30 ET (suitability canary at 9:35). Daily loss floor baseline $53.18 (trip ~$26.59).
+Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 1)...
+Retry attempt 1...
+ActionRequiredError: Increase limits for faster responses You're out of usage. Switch to Auto, or ask your admin to increase your limit to continue.
