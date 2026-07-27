@@ -693,3 +693,10 @@ lockout. See STRATEGY.md Entry rule 4 and Cycle checklist.
 - Scan: Market trending stocks unchanged.
 - MCP Tooling: Robinhood MCP connection not yet authenticated.
 - Decision: NO TRADE. Awaiting manual authorization.
+
+## 2026-07-27 19:30 ET — Cycle 17 (Overnight) — NO TRADE
+
+- Session: Overnight.
+- Scan: Market trending stocks unchanged.
+- MCP Tooling: Robinhood MCP connection not yet authenticated.
+- Decision: NO TRADE. Agent awaiting manual OAuth completion.
