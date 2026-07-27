@@ -630,3 +630,10 @@ lockout. See STRATEGY.md Entry rule 4 and Cycle checklist.
 - Scan (ApeWisdom trending/Reddit): SPY, NVDA, AAPL, TSLA, MSFT, MU, GOOGL.
 - MCP Tooling: Still unavailable. Attempting to troubleshoot the Robinhood connection with user.
 - Decision: NO TRADE. Awaiting MCP connection resolution.
+
+## 2026-07-27 17:15 ET — Cycle 5 (Overnight) — NO TRADE
+
+- Session: Overnight.
+- Scan: Market trending stocks unchanged.
+- MCP Tooling: Robinhood MCP still requires authentication via IDE UI.
+- Decision: NO TRADE. Awaiting user OAuth completion.
