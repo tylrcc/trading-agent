@@ -609,3 +609,10 @@ lockout. See STRATEGY.md Entry rule 4 and Cycle checklist.
 - Current Session: Overnight.
 - Missing Tooling: MCP connection not yet fully instantiated in the tool context.
 - Decision: NO TRADE this cycle. Awaiting IDE to load the `robinhood-trading` tools on next cadence.
+
+## 2026-07-27 16:30 ET — Cycle 2 (Overnight) — NO TRADE
+
+- Session: Overnight. Market closed for regular hours.
+- Scan (ApeWisdom trending/Reddit): SPY, NVDA, TSLA, AAPL, MU, MSFT, QQQ.
+- MCP Tooling: Still unavailable in the agent's tool context. Unable to read portfolio or fetch active quotes/spreads for candidates.
+- Decision: NO TRADE. Cannot execute the strategy rules without bid/ask spreads. Continuing to wait for the IDE to load the Robinhood SSE MCP.
