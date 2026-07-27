@@ -623,3 +623,10 @@ lockout. See STRATEGY.md Entry rule 4 and Cycle checklist.
 - Scan (ApeWisdom trending/Reddit): AAPL momentum increasing as earnings approach; NVDA/MU still dominate tech chatter. SPY continues to be the baseline benchmark.
 - MCP Tooling: Robinhood MCP tools are still missing from the active environment.
 - Decision: NO TRADE. Agent is successfully waking and running the loop but cannot execute trades without the broker connection.
+
+## 2026-07-27 17:00 ET — Cycle 4 (Overnight) — NO TRADE
+
+- Session: Overnight.
+- Scan (ApeWisdom trending/Reddit): SPY, NVDA, AAPL, TSLA, MSFT, MU, GOOGL.
+- MCP Tooling: Still unavailable. Attempting to troubleshoot the Robinhood connection with user.
+- Decision: NO TRADE. Awaiting MCP connection resolution.
