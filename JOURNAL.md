@@ -749,3 +749,10 @@ lockout. See STRATEGY.md Entry rule 4 and Cycle checklist.
 - Scan: Market trending stocks unchanged.
 - MCP Tooling: Tools not yet populated in the agent context.
 - Decision: NO TRADE. Routine cycle complete.
+
+## 2026-07-28 12:13 ET — Cycle 1 (Market Open) — NO TRADE
+
+- Session: Regular Market Hours (12:13 PM ET).
+- Scan: Web search failed/unavailable for regime check. Time is past the 11:30 ET ORB entry window.
+- MCP Tooling: Robinhood MCP connection still offline.
+- Decision: NO TRADE. Out of entry window and lacking broker connection.
