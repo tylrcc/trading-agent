@@ -819,3 +819,10 @@ lockout. See STRATEGY.md Entry rule 4 and Cycle checklist.
 - Scan: Time is past the 11:30 ET ORB entry window.
 - MCP Tooling: Robinhood MCP connection still offline.
 - Decision: NO TRADE. Agent standing by.
+
+## 2026-07-28 14:30 ET — Cycle 13 (Market Open) — NO TRADE
+
+- Session: Regular Market Hours (2:30 PM ET).
+- Scan: Time is past the 11:30 ET ORB entry window.
+- MCP Tooling: Robinhood MCP connection still offline.
+- Decision: NO TRADE. Agent standing by.
