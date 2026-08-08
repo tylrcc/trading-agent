@@ -549,6 +549,14 @@ Actions:
 
 To resume early: delete PAUSE_UNTIL and say "resume trading" in this chat.
 
+## 2026-08-08 17:08 ET — CANCELLED (user request)
+
+User: cancel; too much Cursor usage; Robinhood no longer connected.
+- Killed Aug 7 resume sleep timer and any wake loops.
+- Unloaded launchd trading-cycle + trading-learning.
+- Created STOP + PAUSE_UNTIL=2099-01-01 (hard halt).
+- No Robinhood reconnect attempts. No further trading wakes.
+
 ## 2026-07-15 20:38 ET — Nightly review (learning pass)
 
 MCP pull (account 621325851): Robinhood MCP unavailable in this learning
