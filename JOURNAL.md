@@ -868,3 +868,66 @@ lockout. See STRATEGY.md Entry rule 4 and Cycle checklist.
 - Scan: Time is past the 11:30 ET ORB entry window.
 - MCP Tooling: Robinhood MCP connection still offline.
 - Decision: NO TRADE. Agent standing by.
+
+## 2026-08-07 20:30 ET — Nightly review (learning pass)
+
+MCP pull (account 621325851): Robinhood MCP unavailable in this session
+(`requires_authentication`; interactive OAuth not supported in agent
+environment; same single-connection limit as OPS.md). Headless
+`cursor-agent` learning runs also lack the IDE chat grant. Cross-checked
+against all prior in-chat MCP cycle entries, TRADES.csv fill math, and
+runner.log (pause/resume timeline).
+
+**Portfolio (last verified via in-chat MCP, 2026-07-16 09:24 ET; no broker
+read since):** total value $53.18, cash $53.18, equity $0.00, buying power
+$53.18 (settled). Positions: none. Open orders: none. STOP/DRYRUN/PAUSE_UNTIL:
+absent (pause cleared 2026-07-27; scheduled 2026-08-07 resume date reached).
+
+**Realized P&L (span=all, reconciled):** +$0.18 total on 1 closing trade
+(TQQQ round trip 2026-07-14). Expected MCP result matches journal fills and
+TRADES.csv: 0.7 sh × ($75.2550 − $74.9999) = +$0.1786 ≈ +$0.18 (+0.34% on
+~$52.50 deployed). No new fills since 2026-07-14.
+
+**TRADES.csv reconciliation:** 2 rows (1 entry, 1 exit). Matches journal
+and broker fills. No missing rows added. Exit row `realized_pnl` +0.18 aligns
+with computed round-trip.
+
+**Stats (from TRADES.csv, 1 closed trade):**
+- Win rate: 100% (1W / 0L)
+- Expectancy: +$0.18/trade (+0.34% of deployed notional)
+- Avg win: +$0.18; avg loss: n/a (0 losses)
+- Total realized: +$0.18 vs $53.00 start → account +0.34%
+
+**Period under review (2026-07-16 → 2026-08-07):**
+- 22 calendar days; 1 round trip total (7/14 TQQQ scratch win). Cash idle
+  entire period after pause/resume.
+- 7/16: Cursor usage pause armed through 2026-08-07; suitability still
+  blocking SPY/TQQQ before pause took effect.
+- 7/17–7/26: launchd cycles skipped (PAUSE_UNTIL). No trades (by design).
+- 7/27: user resumed early (PAUSE_UNTIL removed); Antigravity cron loop
+  started but Robinhood MCP never authenticated in agent context (~20
+  overnight NO TRADE cycles logged).
+- 7/28: full regular session missed (MCP offline; past ORB window; no deploy).
+- 8/6–8/7: scheduled pause end reached; headless launchd skips (CLI holds
+  no Robinhood grant); in-chat wake loop not processing cycles (journal stale
+  since 7/28). Friday 8/7 regular session: no deploy logged.
+- Primary failure modes: (1) **MCP auth / broker connectivity** (cannot
+  enforce spread, quotes, or reviews without IDE chat grant), (2) **execution
+  uptime** (wake loop not firing actionable cycles after 7/28), (3) **long
+  pause** (22 days mostly idle; only 1 trade in 36 days since setup).
+
+**Lessons:**
+1. Sentiment-only cycles without a successful `get_portfolio` preflight are
+   wasted quota; 7/27–7/28 logged 20+ NO TRADE entries with zero broker data.
+2. Clearing PAUSE_UNTIL is necessary but not sufficient; the first regular
+   session after resume must bind post-outage fast deploy + suitability canary
+   (7/27 and 8/7 both missed deploy).
+3. One scratch win (+0.34%) confirms the exit rules work; idle cash across
+   multi-week pauses is still the largest drag on the growth goal.
+
+**Strategy tweaks (2):** MCP preflight gate in cycle checklist; pause/resume
+deploy bind in Entry rule 4. See STRATEGY.md.
+
+**Next session:** Monday 2026-08-10 9:30 ET (first deploy window after this
+review; run MCP preflight, suitability canary, post-outage fast deploy).
+Daily loss floor baseline: $53.18 (trip ~$26.59 at 50%).

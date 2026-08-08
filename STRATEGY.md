@@ -96,10 +96,15 @@ Profitable" paper. Rules:
    Same bind applies if **no cycle has logged by 9:40 ET** on a regular
    session (wake loop dead): on the first cycle that fires after 9:40,
    treat as post-outage and run deploy mandate immediately (do not wait
-   for the next day's open). Mandate and fast-deploy may skip ORB timing
-   and meme two-cycle waits, but **never** skip rule 2a (RVOL >= 1.3x and
-   above VWAP). If no name passes 2a by 10:30, use the fallback basket and
-   log which ORB/mandate candidates failed volume/VWAP.
+   for the next day's open). **Pause/resume bind:** on the first regular
+   session on or after a `PAUSE_UNTIL` date (file auto-deleted or manually
+   removed), OR when the journal shows no fill in **>14 calendar days**, run
+   post-outage fast deploy from the first cycle at or after **9:31 ET**
+   (suitability canary first). A billing pause does not count as deploying
+   cash. Mandate and fast-deploy may skip ORB timing and meme two-cycle
+   waits, but **never** skip rule 2a (RVOL >= 1.3x and above VWAP). If no
+   name passes 2a by 10:30, use the fallback basket and log which ORB/mandate
+   candidates failed volume/VWAP.
 5. **Meme-fade rule.** If mention velocity is already declining from its
    peak, require the trigger print to hold across two cycles (60 min) unless
    the daily deploy mandate has already fired (mandate wins after 10:30 ET).
@@ -149,8 +154,12 @@ strategy changes for a session without risking cash.
 1. Read JOURNAL.md tail (positions, settled cash, daily loss trip, STOP,
    DRYRUN). On regular sessions: if no cycle logged today and clock is
    past 9:40 ET, flag post-outage fast deploy (Entry rule 4).
-2. MCP: portfolio, positions, open orders. Enforce exits first. Run
-   suitability canary (Entry rule 8) before any new entry review.
+2. MCP preflight: `get_portfolio` must succeed before regime scan, velocity
+   pull, quotes, or any entry review. If tools are missing or auth fails,
+   log one JOURNAL line (`MCP offline — cycle skipped`) and end the cycle;
+   do not run sentiment-only scans. On success: portfolio, positions, open
+   orders. Enforce exits first. Run suitability canary (Entry rule 8) before
+   any new entry review.
 3. Regime check (SPY/VIX). Scan velocity + news. Shortlist 2 candidates that
    are **affordable now**.
 4. Quotes + historicals + entry rules (HQM-lite score, RVOL >= 1.3x, above
