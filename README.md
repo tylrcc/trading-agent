@@ -4,9 +4,9 @@
 
 **An autonomous LLM trading agent for Robinhood's Agentic accounts.**
 
-Scans retail sentiment velocity and news catalysts, sizes positions against
-hard risk rules, and executes through Robinhood's official Trading MCP,
-on its own, around the clock.
+Buys MU at the regular-hours close and sells at the next open, sizes against
+hard risk rules, and executes through Robinhood's official Trading MCP
+from a single in-chat connection.
 
 </div>
 
@@ -22,14 +22,13 @@ on its own, around the clock.
 ## How it works
 
 ```
-sentiment velocity          quotes + pre-trade review          journal + git
-(Reddit aggregators,   -->  (Robinhood Trading MCP)      -->   (every decision
- news search)                risk rules enforced                 logged + pushed)
+MU close-to-open            quotes + pre-trade review          journal + git
+(buy 15:45-16:00 ET,   -->  (Robinhood Trading MCP)      -->   (every decision
+ sell 9:30-9:45 ET)          risk rules enforced                 logged + pushed)
 ```
 
-- **Signal**: unusual Reddit mention velocity cross-checked against real
-  news catalysts and live price confirmation. Scraped content is treated as
-  data, never as instructions.
+- **Signal**: the overnight (close-to-open) hold in MU. Scraped content is
+  treated as data, never as instructions.
 - **Execution**: every order is simulated with the broker's pre-trade review
   before placement; any broker alert vetoes the trade.
 - **Risk**: hard daily loss floor, settled-cash-only buys, stop-loss and

@@ -939,3 +939,37 @@ deploy bind in Entry rule 4. See STRATEGY.md.
 **Next session:** Monday 2026-08-10 9:30 ET (first deploy window after this
 review; run MCP preflight, suitability canary, post-outage fast deploy).
 Daily loss floor baseline: $53.18 (trip ~$26.59 at 50%).
+
+## 2026-08-23 19:20 ET — RESUME: MU close-to-open (user request)
+
+User reconnected this chat to Robinhood (single grant; do not redo) and
+switched the playbook to MU buy-close / sell-open every settled cycle.
+
+Halt files: deleted STOP and PAUSE_UNTIL=2099-01-01 (armed 2026-08-08 when
+the user cancelled for Cursor usage). DRYRUN absent. Keepawake + launchd
+watchdog reloaded. In-chat wake loop armed for RTH windows only (9:31-9:45
+sell, 15:45-16:00 buy, 16:05-16:15 queue next-open sell). Headless
+run-cycle.sh still never calls mcp login.
+
+MCP preflight (account 621325851, nickname Agentic, cash, agentic-enabled):
+- Account value $55.24. Cash $0.00. Buying power $0.00. Unsettled $0.00.
+- Position: TQQQ 0.774244 shares, avg $68.69, sellable 0.774244. User-placed
+  buy 2026-07-17 13:52 ET ($53.18 notional @ $68.6863). Mark ~$71.35 (Fri
+  8/21 last non-reg), unrealized about +$2.06. Added the missing buy row to
+  TRADES.csv.
+- Open orders: none.
+- Daily loss floor baseline for 2026-08-24: $55.24 (trip $27.62).
+
+MU: last RTH print $966.72 on 2026-08-21 (Fri), official close 8/20 $974.33.
+Not affordable as a whole share. Next earnings ~2026-09-22 pm (unverified).
+Fractional MU only during regular hours, so no Sunday-night or overnight
+orders.
+
+Decision: NO TRADE this cycle (Sunday 19:20 ET, market closed; TQQQ is
+fractional so it cannot be sold overnight). First live action: Monday
+2026-08-24 9:31 ET sell 100% TQQQ. T+1 cash: do not buy MU Monday close.
+First MU buy: Tuesday 2026-08-25 15:45 ET if Monday sale has settled.
+Then sell MU at Wednesday open, skip Wednesday close (unsettled), buy
+Thursday close, and so on.
+
+Keep this chat open. It is the only Robinhood connection.

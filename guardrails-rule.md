@@ -12,6 +12,17 @@ These rules apply whenever any `robinhood-trading` MCP tool is used.
 - Only trade in that account. All other accounts are strictly read-only.
 - The Agentic account is a cash account with no options approval: equities only, long only, no margin.
 
+## Single MCP connection (do not redo)
+- Robinhood permits exactly ONE active Cursor connection per user. The IDE
+  chat that already completed `mcp_auth` for `user-robinhood-trading` is
+  that grant. It cannot be redone without kicking the live session.
+- NEVER call `mcp_auth` again while tools already work. NEVER run
+  `cursor-agent mcp login robinhood-trading`. NEVER authenticate from a
+  second chat, CLI, or cloud agent. Headless `run-cycle.sh` must skip when
+  the CLI has no grant (it already does) rather than logging in.
+- If tools go missing, log `MCP offline` and wait for this chat. Do not
+  open a new OAuth grant.
+
 ## Hard rules
 - ALWAYS call `review_equity_order` before `place_equity_order`. If the review returns any non-empty alert in `order_checks`, do NOT place the order; log the alert to the journal instead.
 - Prefer limit orders (marketable limits) over market orders. Outside regular hours (9:30-16:00 ET), whole-share limit orders only; fractional/dollar orders only during regular hours.

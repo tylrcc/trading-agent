@@ -78,14 +78,14 @@ cd "$HOME/ty"
 PROMPT="You are the autonomous trading agent for the Robinhood Agentic account
 (ending 5851). Session=$session. Follow /Users/tyler/ty/projects/trading-agent/STRATEGY.md
 and .cursor/rules/robinhood-trading-guardrails.mdc exactly.
-Run ONE cycle: read JOURNAL.md tail, check portfolio/positions/orders,
-enforce exits first. Regime check (SPY/VIX) before entries. Then deploy
-settled cash per the ORB playbook (9:45-11:30 ET) and daily mandate
-(affordable names only; fractional all-in in regular hours). Signal via
-ApeWisdom + web search; rank candidates with the HQM-lite momentum score
-(get_equity_historicals: 5d/20d/today returns) and require RVOL >= 1.3x and
-price above session VWAP for regular-hours buys. Log to JOURNAL.md and
-append fills to TRADES.csv. Be decisive. No questions.$DRYRUN_NOTE"
+This process must NEVER call mcp login or mcp_auth; the IDE chat holds the
+only Robinhood grant. If tools are unauthenticated, skip (do not login).
+Run ONE cycle: read JOURNAL.md tail, check portfolio/positions/orders.
+MU close-to-open only: sell at 9:30-9:45 ET if holding; buy MU with all
+settled cash at 15:45-16:00 ET; after 16:00 queue a regular_hours market
+sell for the next open. Flatten any non-MU position at the open first.
+Never spend same-day sale proceeds. Log to JOURNAL.md and TRADES.csv.
+Be decisive. No questions.$DRYRUN_NOTE"
 
 # Kill hung agents after TIMEOUT_SECS.
 (
