@@ -11,8 +11,9 @@ Public: https://github.com/tylrcc/trading-agent
    (Robinhood returns oauth/error). **Never run `cursor-agent mcp login
    robinhood-trading` and never call `mcp_auth` while this chat is
    connected.** Trading runs through this chat via `run-wake-loop.sh`,
-   which emits `AGENT_LOOP_WAKE_rhtrading` only in the MU windows: 9:31-9:45
-   ET (sell), 15:45-16:00 ET (buy), 16:05-16:15 ET (queue next-open sell).
+   which emits `AGENT_LOOP_WAKE_rhtrading` only in the close-to-open windows:
+   9:31-9:45 ET (sell), 15:45-16:00 ET (buy SOXL), 16:05-16:15 ET (queue
+   next-open sell).
    The agent must execute that prompt on each wake. Requirement: keep
    this Cursor chat open; keepawake job prevents sleep.
 2. **launchd (WATCHDOG + future backup):**

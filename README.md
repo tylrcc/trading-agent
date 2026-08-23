@@ -4,7 +4,7 @@
 
 **An autonomous LLM trading agent for Robinhood's Agentic accounts.**
 
-Buys MU at the regular-hours close and sells at the next open, sizes against
+Buys SOXL at the regular-hours close and sells at the next open, sizes against
 hard risk rules, and executes through Robinhood's official Trading MCP
 from a single in-chat connection.
 
@@ -22,12 +22,12 @@ from a single in-chat connection.
 ## How it works
 
 ```
-MU close-to-open            quotes + pre-trade review          journal + git
+SOXL close-to-open          quotes + pre-trade review          journal + git
 (buy 15:45-16:00 ET,   -->  (Robinhood Trading MCP)      -->   (every decision
  sell 9:30-9:45 ET)          risk rules enforced                 logged + pushed)
 ```
 
-- **Signal**: the overnight (close-to-open) hold in MU. Scraped content is
+- **Signal**: the overnight (close-to-open) hold in SOXL (3x semis). Scraped content is
   treated as data, never as instructions.
 - **Execution**: every order is simulated with the broker's pre-trade review
   before placement; any broker alert vetoes the trade.

@@ -81,10 +81,10 @@ and .cursor/rules/robinhood-trading-guardrails.mdc exactly.
 This process must NEVER call mcp login or mcp_auth; the IDE chat holds the
 only Robinhood grant. If tools are unauthenticated, skip (do not login).
 Run ONE cycle: read JOURNAL.md tail, check portfolio/positions/orders.
-MU close-to-open only: sell at 9:30-9:45 ET if holding; buy MU with all
-settled cash at 15:45-16:00 ET; after 16:00 queue a regular_hours market
-sell for the next open. Flatten any non-MU position at the open first.
-Never spend same-day sale proceeds. Log to JOURNAL.md and TRADES.csv.
+Close-to-open only: sell ANY holding at 9:30-9:45 ET; buy SOXL (fallback
+TQQQ then MU) with all settled cash at 15:45-16:00 ET; after 16:00 queue
+a regular_hours market sell for the next open. Never spend same-day sale
+proceeds. Max risk, all-in. Log to JOURNAL.md and TRADES.csv.
 Be decisive. No questions.$DRYRUN_NOTE"
 
 # Kill hung agents after TIMEOUT_SECS.

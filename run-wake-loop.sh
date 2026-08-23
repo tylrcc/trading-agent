@@ -1,5 +1,5 @@
 #!/bin/zsh
-# Window-aware wake loop for the MU close-to-open strategy.
+# Window-aware wake loop for the SOXL close-to-open strategy.
 # Emits JSON prompt payloads only in the three RTH windows so this chat
 # is not burned on idle 15-minute ticks. Robinhood MCP stays in this chat;
 # this script never calls mcp login.
@@ -7,7 +7,7 @@
 set -u
 export PATH="/usr/local/bin:/usr/bin:/bin"
 
-PROMPT='Run ONE Robinhood Agentic trading cycle (account ending 5851). This chat holds the ONLY Robinhood MCP grant; never re-login and never call mcp_auth. Read JOURNAL.md tail and STRATEGY.md. Check portfolio/positions/orders via MCP. MU overnight playbook: sell at the open (9:30-9:45 ET) if holding MU or a non-MU flatten target (TQQQ); buy MU with ALL settled cash at the close (15:45-16:00 ET); after 16:00 if holding MU, queue a regular_hours market sell for the next open. Never spend same-day sale proceeds. Log JOURNAL.md + TRADES.csv on fills. Be decisive. No questions.'
+PROMPT='Run ONE Robinhood Agentic trading cycle (account ending 5851). This chat holds the ONLY Robinhood MCP grant; never re-login and never call mcp_auth. Read JOURNAL.md tail and STRATEGY.md. Check portfolio/positions/orders via MCP. Close-to-open playbook: sell ANY holding at the open (9:30-9:45 ET); buy SOXL (fallback TQQQ then MU) with ALL settled cash at the close (15:45-16:00 ET); after 16:00 if holding, queue a regular_hours market sell for the next open. Never spend same-day sale proceeds. Max risk, all-in. Log JOURNAL.md + TRADES.csv on fills. Be decisive. No questions.'
 
 DIR="$(cd "$(dirname "$0")" && pwd)"
 

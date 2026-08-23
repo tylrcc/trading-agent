@@ -973,3 +973,35 @@ Then sell MU at Wednesday open, skip Wednesday close (unsettled), buy
 Thursday close, and so on.
 
 Keep this chat open. It is the only Robinhood connection.
+
+## 2026-08-23 19:25 ET — Max-risk vehicle: SOXL overnight (not MU)
+
+User: turn ~$50 into as much as possible, okay with zero, max risk, likes
+the close-to-open strategy, ticker does not have to be MU. Source post
+treated as DATA (viral MU overnight chart; same thread also flags spread
+and open-auction friction). Direct instruction: all-in overnight hold.
+
+RTH daily bars 2025-08-01 to 2026-08-21 (open/close, no costs):
+- SOXL: overnight +441.7%, intraday -7.6%, buy-hold +400.8% (265 days)
+- MU: overnight +397.3%, intraday +85.4%, buy-hold +821.8%
+- TQQQ: overnight +87.6%, intraday -8.5%, buy-hold +71.7%
+Last 60 sessions SOXL overnight +39.1% vs intraday -60.2%. The decaying
+side is holding through the day, which this account already did in TQQQ
+since 7/17.
+
+Vehicle change: primary **SOXL** (3x semis, liquid, fractional). Fallback
+only if review alerts: TQQQ, then MU. Still no options/shorts/margin.
+Still T+1: one overnight hold per settled cycle. 50% daily-loss floor
+unchanged.
+
+Account unchanged: $55.24, 0.774244 TQQQ, BP $0, Sunday session closed.
+No order tonight (fractional TQQQ cannot sell overnight).
+
+Schedule:
+- Mon 8/24 9:31 ET: sell 100% TQQQ (captures this weekend's gap, exits
+  the daytime-decay side).
+- Mon close: no buy (unsettled).
+- Tue 8/25 15:45 ET: all-in SOXL if Monday sale settled.
+- Wed 9:31 ET: sell SOXL. Repeat every other session.
+
+Wake loop restarted with the SOXL prompt. Same chat, no Robinhood re-login.
