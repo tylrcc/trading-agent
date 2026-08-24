@@ -1067,3 +1067,23 @@ Playbook §1.
 **Next session:** Monday 2026-08-24 9:31 ET sell 100% TQQQ (first live
 action). T+1: first SOXL buy Tue 2026-08-25 15:45 ET if Monday sale
 settles. Daily loss floor baseline: $55.24 (trip ~$27.62 at 50%).
+
+## 2026-08-24 09:35 ET — Cycle (open sell) — TQQQ FILL
+
+Session: regular, sell window. STOP/DRYRUN/PAUSE_UNTIL absent. MCP grant
+still this chat (no re-login).
+
+Portfolio before: $53.48 equity, TQQQ 0.774244 @ $68.69, BP $0, no open
+orders. Daily loss floor not tripped. TQQQ quote ~$69.11, bid 69.10 / ask
+69.11. Review of sell 0.774244 market regular_hours: order_checks empty.
+
+Placed market sell (ref 9be245a7-28ae-4884-a29b-f858f5f0b01f). Filled
+09:35:37 ET: 0.774244 sh @ $69.1801, notional $53.56. Realized +$0.38 vs
+7/17 cost $68.6863.
+
+After: account value $53.56 cash, equity $0, buying power $0.00 (unsettled
+proceeds $53.56). Positions none. Open orders none.
+
+No SOXL buy today (same-day sale, cash-account T+1). Next: Tue 2026-08-25
+15:45 ET all-in SOXL if this sale has settled. Mon 15:45 cycle will log
+skip. Daily loss floor baseline rest-of-day: $53.56 (trip $26.78).

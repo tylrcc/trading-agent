@@ -2,3 +2,4 @@ timestamp_et,symbol,side,qty_or_dollars,fill_price,notional,thesis,exit_reason,r
 2026-07-14T09:59:01-04:00,TQQQ,buy,52.50,74.9999,52.50,MU-led semis momentum TQQQ 3x QQQ proxy post-outage fast deploy,,
 2026-07-14T15:28:46-04:00,TQQQ,sell,0.700000,75.2550,52.68,flat/weak thesis 3:30 exit rule,flat_weak_1530,+0.18
 2026-07-17T13:52:44-04:00,TQQQ,buy,53.18,68.6863,53.18,user-placed TQQQ buy (not agent),,
+2026-08-24T09:35:37-04:00,TQQQ,sell,0.774244,69.1801,53.56,flatten TQQQ at open for SOXL close-to-open rotation,open_flatten_cto,+0.38
