@@ -65,6 +65,9 @@ settles (expected Tuesday 2026-08-25 15:45 ET).
 ### 1. Open window (9:30-9:45 ET) — SELL
 
 If holding any equity:
+- First cycle in this window: `get_equity_orders`. If no working queued
+  sell for the full position, place a live market sell (do not assume the
+  prior close queue succeeded).
 - Side sell, type market, `quantity` = `shares_available_for_sells`,
   `market_hours=regular_hours`, `time_in_force=gfd`.
 - Review first. Non-empty `order_checks` = do not place; log and retry
@@ -130,10 +133,14 @@ If holding equity and no sell is already open:
 2. Read JOURNAL.md tail. Check STOP / DRYRUN / PAUSE_UNTIL.
 3. `get_portfolio`, `get_equity_positions`, `get_equity_orders` on
    account 621325851.
-4. Enforce the window: sell at open, buy SOXL at close, queue sell after
+4. **Resume reconciliation:** if STOP/PAUSE was cleared since the last
+   fill row in TRADES.csv, or the journal gap exceeds 7 calendar days,
+   pull MCP order/fill history and backfill any missing TRADES.csv rows
+   before the next trading window. User-placed fills count.
+5. Enforce the window: sell at open, buy SOXL at close, queue sell after
    close. At most one new order per cycle.
-5. review → place if clean (skip place in DRYRUN). Log JOURNAL + TRADES.csv.
-6. If market closed: one heartbeat line, re-arm for the next window.
+6. review → place if clean (skip place in DRYRUN). Log JOURNAL + TRADES.csv.
+7. If market closed: one heartbeat line, re-arm for the next window.
 
 ## Trade ledger
 

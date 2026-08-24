@@ -129,3 +129,38 @@ TRADES.csv is complete. No rows added (no fills since 2026-07-14).
 **Next deploy window:** Monday 2026-08-10 9:30 ET. Daily loss floor baseline $53.18 (trip ~$26.59).
 
 Updates are in `JOURNAL.md` and `STRATEGY.md`. To enable live MCP pulls in future headless learning runs, authenticate `robinhood-trading` in the Cursor desktop IDE (this chat session can hold the single Robinhood grant per OPS.md).
+## Nightly review complete (account ending 5851)
+
+**MCP status:** Robinhood MCP is not authenticated in this learning session (`requires_authentication`; headless pass lacks the IDE chat grant). Reconciled from today's in-chat MCP preflight (19:20 ET), journal fills, and TRADES.csv.
+
+**Portfolio (last verified 19:20 ET):** $55.24 total. TQQQ 0.774244 sh @ avg $68.69 (~$71.35 mark, unrealized ~+$2.06). Cash/BP $0. STOP / DRYRUN / PAUSE_UNTIL absent.
+
+### P&L reconciliation
+
+| Source | Result |
+|--------|--------|
+| Expected MCP (realized) | 1 closing trade, **+$0.18** |
+| TRADES.csv | 3 rows: closed 7/14 round trip + open 7/17 entry |
+| Fill math | 0.7 × ($75.2550 − $74.9999) = +$0.1786 |
+
+TRADES.csv is complete. No rows added (7/17 buy was backfilled earlier today during resume).
+
+### Stats (1 closed trade)
+
+- **Win rate:** 100% (1W / 0L)
+- **Expectancy:** +$0.18/trade (+0.34% of deployed notional)
+- **Total realized:** +$0.18; open TQQQ unrealized ~+$2.06
+- **Account:** $55.24 vs $53.00 start (+$2.24, mostly unrealized)
+
+### Period (2026-08-07 → 2026-08-23)
+
+16 days mostly halted (STOP/PAUSE from 8/08). Resumed 8/23: MCP reconnected in chat, stale TQQQ position found, strategy pivoted to SOXL close-to-open overnight. One closed scratch win (7/14); TQQQ held through RTH since 7/17 user buy.
+
+### Strategy tweaks (2) in STRATEGY.md
+
+1. **Resume reconciliation bind** in cycle checklist: after STOP/PAUSE clear or >7-day journal gap, backfill TRADES.csv from MCP order history before the next window.
+2. **Open-window sell verification** in Playbook §1: at 9:31, confirm a queued sell exists; if not, place a live market sell immediately.
+
+**Next action:** Monday 2026-08-24 9:31 ET, sell 100% TQQQ. First SOXL buy: Tue 2026-08-25 15:45 ET (T+1). Daily loss floor baseline $55.24 (trip ~$27.62).
+
+Updates appended to `JOURNAL.md` and `STRATEGY.md`. No trades placed.

@@ -1005,3 +1005,65 @@ Schedule:
 - Wed 9:31 ET: sell SOXL. Repeat every other session.
 
 Wake loop restarted with the SOXL prompt. Same chat, no Robinhood re-login.
+
+## 2026-08-23 20:30 ET — Nightly review (learning pass)
+
+MCP pull (account 621325851): Robinhood MCP unavailable in this learning
+session (`requires_authentication`; headless learning pass lacks the IDE
+chat grant; same single-connection limit as OPS.md). Cross-checked against
+today's in-chat MCP preflight (19:20 ET), prior journal fills, and
+TRADES.csv.
+
+**Portfolio (last verified via in-chat MCP, 19:20 ET):** total value
+$55.24, cash $0.00, equity ~$55.24 (TQQQ 0.774244 sh @ avg $68.69,
+mark ~$71.35, unrealized ~+$2.06). Buying power $0.00 (fully deployed).
+Positions: TQQQ 0.774244. Open orders: none. STOP/DRYRUN/PAUSE_UNTIL:
+absent (cleared 19:20 ET resume).
+
+**Realized P&L (span=all, reconciled):** +$0.18 total on 1 closing trade
+(TQQQ round trip 2026-07-14). Expected MCP result: 0.7 sh × ($75.2550 −
+$74.9999) = +$0.1786 ≈ +$0.18 (+0.34% on ~$52.50 deployed). Open TQQQ
+position (2026-07-17 user buy, 0.774244 sh @ $68.6863) has no exit yet;
+unrealized ~+$2.06 at Fri 8/21 mark. Account +$2.24 vs $53.00 start
+($55.24 total, mostly unrealized).
+
+**TRADES.csv reconciliation:** 3 rows (2 for closed 7/14 round trip, 1
+open 7/17 entry). Matches journal and in-chat MCP position read. The 7/17
+buy row was added during today's resume preflight; no additional missing
+rows. Exit row `realized_pnl` +0.18 aligns with computed round-trip.
+
+**Stats (from TRADES.csv, 1 closed trade):**
+- Win rate: 100% (1W / 0L)
+- Expectancy: +$0.18/trade (+0.34% of deployed notional)
+- Avg win: +$0.18; avg loss: n/a (0 losses)
+- Total realized: +$0.18; open position unrealized ~+$2.06
+
+**Period under review (2026-08-07 → 2026-08-23):**
+- 16 calendar days; hard halt 8/08 (STOP + PAUSE 2099) through 8/23
+  resume. One closed trade total (7/14 scratch win); one open TQQQ hold
+  since 7/17 user buy (36 days intraday exposure, validates SOXL pivot).
+- 8/23: user reconnected Robinhood MCP in this chat; discovered TQQQ
+  0.774244 (+~$2.06 unrealized); backfilled missing TRADES.csv entry;
+  strategy rewritten for close-to-open SOXL overnight (replacing ORB
+  day-trade playbook).
+- Primary failure modes: (1) **long halt** left a stale TQQQ position
+  decaying through RTH for 5+ weeks, (2) **ledger gap** (7/17 user fill
+  not in TRADES.csv until resume), (3) **MCP split** (in-chat grant works;
+  headless learning pass cannot pull live P&L).
+
+**Lessons:**
+1. User-placed fills outside agent cycles must be reconciled on resume;
+   a 5-week TRADES.csv gap hid the true open exposure.
+2. Holding TQQQ through regular hours since 7/17 cost opportunity vs the
+   overnight edge; flatten-first + SOXL close-to-open is the corrective
+   playbook starting Mon 8/24.
+3. Unrealized +$2.06 on the open TQQQ lot confirms the account grew while
+   idle; realizing it at Mon open is the first execution priority.
+
+**Strategy tweaks (2):** resume reconciliation bind in cycle checklist;
+open-window queued-sell verification. See STRATEGY.md Cycle checklist and
+Playbook §1.
+
+**Next session:** Monday 2026-08-24 9:31 ET sell 100% TQQQ (first live
+action). T+1: first SOXL buy Tue 2026-08-25 15:45 ET if Monday sale
+settles. Daily loss floor baseline: $55.24 (trip ~$27.62 at 50%).
