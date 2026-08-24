@@ -1085,5 +1085,15 @@ After: account value $53.56 cash, equity $0, buying power $0.00 (unsettled
 proceeds $53.56). Positions none. Open orders none.
 
 No SOXL buy today (same-day sale, cash-account T+1). Next: Tue 2026-08-25
-15:45 ET all-in SOXL if this sale has settled. Mon 15:45 cycle will log
-skip. Daily loss floor baseline rest-of-day: $53.56 (trip $26.78).
+15:45 ET all-in SOXL if this sale has settled. Daily loss floor baseline
+rest-of-day: $53.56 (trip $26.78).
+
+## 2026-08-24 09:42 ET — Usage cut: one wake per trade
+
+User: only turn the loop on when a trade is needed. Killed the 5-minute
+open-window pings (09:31/09:36/09:41 duplicates after TQQQ was already
+flat). Loop now sleeps until NEXT_WAKE and fires once.
+
+NEXT_WAKE set to 2026-08-25 15:45 ET (first SOXL buy if Monday sale
+settled). No Monday 15:45 or 16:05 wake (unsettled, flat). Account still
+$53.56 cash, BP $0, no positions.

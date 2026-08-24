@@ -1,5 +1,7 @@
 .cycle.lock
 STOP
 DRYRUN
+NEXT_WAKE
+LAST_FIRED
 launchd-*.err
 .venv/

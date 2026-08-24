@@ -140,7 +140,16 @@ If holding equity and no sell is already open:
 5. Enforce the window: sell at open, buy SOXL at close, queue sell after
    close. At most one new order per cycle.
 6. review → place if clean (skip place in DRYRUN). Log JOURNAL + TRADES.csv.
-7. If market closed: one heartbeat line, re-arm for the next window.
+7. **Re-arm NEXT_WAKE** to the next time an order is actually required
+   (ET `YYYY-MM-DD HH:MM` in `/Users/tyler/ty/projects/trading-agent/NEXT_WAKE`).
+   One wake per trade. Do not schedule idle windows. Examples: after an
+   open sell with T+1 cash, jump to the next close that can settle (often
+   the following session's 15:45). After a close buy, set 16:05 same day
+   to queue the open sell. After that queue, set the next 09:31. Weekends
+   and unsettled days: skip. If no trade is needed, still write a future
+   NEXT_WAKE so the loop stays quiet.
+8. If market closed and no NEXT_WAKE was due: do not journal a heartbeat
+   unless the wake file was wrong.
 
 ## Trade ledger
 
