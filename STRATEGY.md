@@ -56,9 +56,9 @@ If holding anything that is not the current overnight vehicle, sell
 buy the overnight name until that sale has settled (`buying_power` > 0
 and no same-day sale).
 
-Current: TQQQ 0.774244 from a 2026-07-17 user buy. Sell it Monday
-2026-08-24 9:31 ET. First SOXL buy: first close AFTER that sale
-settles (expected Tuesday 2026-08-25 15:45 ET).
+Current: flat as of 2026-08-24 open (TQQQ flatten filled 09:35 ET;
++$0.38 realized). Cash ~$53.56 unsettled until T+1. First SOXL buy:
+Tuesday 2026-08-25 15:45 ET if Monday sale has settled.
 
 ## Playbook (every regular session)
 
@@ -73,6 +73,9 @@ If holding any equity:
 - Review first. Non-empty `order_checks` = do not place; log and retry
   next cycle in this window only.
 - Do not buy anything in the open window.
+- On fill: set NEXT_WAKE to the next eligible close (typically the
+  following session's 15:45 ET after T+1 settlement). Do not arm
+  additional open-window wakes that day.
 
 If flat: heartbeat only.
 

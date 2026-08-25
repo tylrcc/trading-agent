@@ -164,3 +164,34 @@ TRADES.csv is complete. No rows added (7/17 buy was backfilled earlier today dur
 **Next action:** Monday 2026-08-24 9:31 ET, sell 100% TQQQ. First SOXL buy: Tue 2026-08-25 15:45 ET (T+1). Daily loss floor baseline $55.24 (trip ~$27.62).
 
 Updates appended to `JOURNAL.md` and `STRATEGY.md`. No trades placed.
+Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 1)...
+Retry attempt 1...
+## Nightly review complete
+
+Robinhood MCP was offline in this learning session (`requires_authentication`; same single-connection limit). Reconciled from today's in-chat cycle entries and `TRADES.csv` instead.
+
+### Portfolio (last verified 09:42 ET)
+- **Value:** $53.56 cash, flat, BP $0 (unsettled until Tue open)
+- **Halt files:** STOP / DRYRUN / PAUSE_UNTIL absent
+
+### Realized P&L (reconciled)
+| Trade | P&L |
+|-------|-----|
+| TQQQ 7/14 round trip | +$0.18 |
+| TQQQ 7/17 → 8/24 flatten | +$0.38 |
+| **Total** | **+$0.56** (+1.06% vs $53.00 start) |
+
+### TRADES.csv
+4 rows, 2 closed round trips. No missing rows; today's 09:35 exit was already logged.
+
+### Stats (2 closed trades)
+- **Win rate:** 100% (2W / 0L)
+- **Expectancy:** +$0.28/trade
+- **Avg win:** +$0.28; avg loss: n/a
+
+### Strategy tweaks (2)
+1. **Flatten first** updated: TQQQ flatten done; first SOXL buy Tue 8/25 15:45 if settled
+2. **Playbook §1:** on open sell fill, jump NEXT_WAKE to next eligible close; no extra open-window wakes that day
+
+### Next action
+**Tue 2026-08-25 15:45 ET** — all-in SOXL buy (if Mon sale settled). Daily loss floor: $53.56 (trip ~$26.78).

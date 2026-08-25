@@ -2111,3 +2111,14 @@
 2026-08-24 14:40:25 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
 2026-08-24 15:27:41 EDT RUN: session=regular
 2026-08-24 15:44:16 EDT DONE: exit=1
+2026-08-24 15:44:16 EDT WARN: git push failed
+2026-08-24 17:58:12 EDT SKIP: overnight session, hourly cadence
+2026-08-24 18:13:13 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-24 18:28:13 EDT SKIP: overnight session, hourly cadence
+2026-08-24 18:43:13 EDT SKIP: overnight session, hourly cadence
+2026-08-24 18:58:29 EDT SKIP: overnight session, hourly cadence
+2026-08-24 19:13:31 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-24 19:28:31 EDT SKIP: overnight session, hourly cadence
+2026-08-24 19:45:15 EDT SKIP: overnight session, hourly cadence
+2026-08-24 20:31:36 LEARN: start
+2026-08-24 20:41:08 LEARN: exit=0

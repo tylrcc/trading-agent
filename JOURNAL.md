@@ -1097,3 +1097,57 @@ flat). Loop now sleeps until NEXT_WAKE and fires once.
 NEXT_WAKE set to 2026-08-25 15:45 ET (first SOXL buy if Monday sale
 settled). No Monday 15:45 or 16:05 wake (unsettled, flat). Account still
 $53.56 cash, BP $0, no positions.
+
+## 2026-08-24 20:38 ET — Nightly review (learning pass)
+
+MCP pull (account 621325851): Robinhood MCP unavailable in this learning
+session (`requires_authentication`; headless learning pass lacks the IDE
+chat grant; same single-connection limit as OPS.md). Cross-checked against
+today's in-chat MCP cycle entries (09:35 TQQQ exit fill), prior journal
+fills, and TRADES.csv.
+
+**Portfolio (last verified via in-chat MCP, 09:42 ET):** total value
+$53.56, cash $53.56, equity $0.00, buying power $0.00 (unsettled sale
+proceeds; spendable settled cash $0 until Tuesday open). Positions: none.
+Open orders: none. STOP/DRYRUN/PAUSE_UNTIL: absent.
+
+**Realized P&L (span=all, reconciled):** +$0.56 total on 2 closing trades.
+Trade 1 (TQQQ 2026-07-14): 0.7 sh × ($75.2550 − $74.9999) = +$0.18.
+Trade 2 (TQQQ 2026-07-17 → 2026-08-24): 0.774244 sh × ($69.1801 −
+$68.6863) = +$0.38. Expected MCP `get_realized_pnl` result: +$0.56
+(+1.06% vs $53.00 start). No new fills after 09:35 ET exit.
+
+**TRADES.csv reconciliation:** 4 rows (2 closed round trips). Matches
+journal and in-chat MCP fills. No missing rows added. Exit rows
+`realized_pnl` +0.18 and +0.38 align with computed round-trips.
+
+**Stats (from TRADES.csv, 2 closed trades):**
+- Win rate: 100% (2W / 0L)
+- Expectancy: +$0.28/trade (+0.53% avg of deployed notional)
+- Avg win: +$0.28; avg loss: n/a (0 losses)
+- Total realized: +$0.56 vs $53.00 start → account +1.06% ($53.56 cash)
+
+**Period under review (2026-08-23 → 2026-08-24):**
+- First live execution since 8/23 resume: TQQQ open flatten at 09:35 ET
+  (+$0.38, validating exit-from-intraday-decay before SOXL rotation).
+- User cut wake loop to one ping per trade; NEXT_WAKE → Tue 8/25 15:45
+  SOXL buy (correct T+1 skip for Monday close).
+- TRADES.csv exit row logged same cycle as fill; ledger current.
+- Primary failure mode: **MCP split** (in-chat grant works for cycles;
+  headless learning pass cannot pull live P&L; reconciled from journal).
+
+**Lessons:**
+1. Open flatten at first cycle in 9:30-9:45 captured the weekend gap
+   (+$0.38 vs 7/17 cost); delaying would have re-exposed to intraday decay.
+2. One wake per trade after fill prevents duplicate open-window pings
+   (09:31/09:36/09:41 killed after TQQQ was already flat).
+3. Two scratch-to-modest wins (+0.34%, +0.71%) confirm exit discipline;
+   SOXL close-to-open is the next deploy path with settled cash.
+
+**Strategy tweaks (2):** flatten-first state updated; post-open-fill
+NEXT_WAKE jump in Playbook §1. See STRATEGY.md Flatten first and
+Playbook §1.
+
+**Next session:** Tuesday 2026-08-25 15:45 ET all-in SOXL buy if Monday
+8/24 sale has settled. Daily loss floor baseline: $53.56 (trip ~$26.78
+at 50%).
