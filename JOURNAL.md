@@ -1151,3 +1151,62 @@ Playbook §1.
 **Next session:** Tuesday 2026-08-25 15:45 ET all-in SOXL buy if Monday
 8/24 sale has settled. Daily loss floor baseline: $53.56 (trip ~$26.78
 at 50%).
+
+## 2026-08-25 21:14 ET — Nightly review (learning pass)
+
+MCP pull (account 621325851): Robinhood MCP unavailable in this session
+(no `user-robinhood-trading` namespace in agent tool context; same
+single-connection limit as OPS.md). Do not re-login. Cross-checked against
+8/24 in-chat MCP cycle entries, TRADES.csv fill math, NEXT_WAKE/LAST_FIRED
+state, and runner.log.
+
+**Portfolio (last verified via in-chat MCP, 2026-08-24 09:42 ET; no broker
+read since):** total value $53.56, cash $53.56, equity $0.00, buying
+power $0.00 at last read (T+1 sale proceeds were unsettled Mon morning;
+settled by Tue open). Positions: none. Open orders: none.
+STOP/DRYRUN/PAUSE_UNTIL: absent.
+
+**Realized P&L (span=all, reconciled from TRADES.csv):** +$0.56 total on 2
+closing trades. Expected MCP `get_realized_pnl` result: Trade 1 (TQQQ
+2026-07-14): 0.7 sh × ($75.2550 − $74.9999) = +$0.18. Trade 2 (TQQQ
+2026-07-17 → 2026-08-24): 0.774244 sh × ($69.1801 − $68.6863) = +$0.38.
+Total +$0.56 (+1.06% vs $53.00 start). No new fills logged 2026-08-25.
+
+**TRADES.csv reconciliation:** 4 rows (2 closed round trips). Matches
+journal and in-chat MCP fills through 8/24. No missing rows added. Exit
+rows `realized_pnl` +0.18 and +0.38 align with computed round-trips.
+
+**Stats (from TRADES.csv, 2 closed trades):**
+- Win rate: 100% (2W / 0L)
+- Expectancy: +$0.28/trade (+0.53% avg of deployed notional)
+- Avg win: +$0.28; avg loss: n/a (0 losses)
+- Total realized: +$0.56 vs $53.00 start → account +1.06% ($53.56 cash)
+
+**Period under review (2026-08-24 → 2026-08-25):**
+- Mon 8/24: TQQQ open flatten executed (+$0.38); wake loop cut to one
+  ping per trade; NEXT_WAKE → Tue 15:45 SOXL buy.
+- Tue 8/25: scheduled first SOXL close buy **missed**. NEXT_WAKE still
+  2026-08-25 15:45; no LAST_FIRED file; no cycles.log entry; no SOXL
+  row in TRADES.csv. Likely wake loop not running or chat not processing
+  wakes while MCP grant requires this session.
+- Cash has been flat and settled since Tue open (~$53.56); one full
+  overnight edge session lost to execution uptime.
+- Primary failure mode: **execution uptime** (overdue NEXT_WAKE with no
+  cycle fired). Secondary: **MCP split** (learning pass cannot pull live
+  P&L; in-chat grant required for broker reads).
+
+**Lessons:**
+1. A single missed 15:45 close with settled cash is a full skipped
+   overnight hold; the cost is the entire SOXL gap, not a scratch.
+2. NEXT_WAKE stuck in the past with no LAST_FIRED means the wake loop is
+   dead or unwired; nightly review must roll the timestamp forward and
+   flag the miss.
+3. Two closed wins (+0.34%, +0.71%) are modest; the playbook only pays
+   when close-to-open cycles actually fire.
+
+**Strategy tweaks (2):** overdue NEXT_WAKE recovery in cycle checklist;
+close-buy outcome verification in Playbook §2. See STRATEGY.md.
+
+**Next session:** Wednesday 2026-08-26 15:45 ET all-in SOXL buy (Mon sale
+settled; Tue close missed). Daily loss floor baseline: $53.56 (trip
+~$26.78 at 50%).

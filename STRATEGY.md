@@ -56,9 +56,9 @@ If holding anything that is not the current overnight vehicle, sell
 buy the overnight name until that sale has settled (`buying_power` > 0
 and no same-day sale).
 
-Current: flat as of 2026-08-24 open (TQQQ flatten filled 09:35 ET;
-+$0.38 realized). Cash ~$53.56 unsettled until T+1. First SOXL buy:
-Tuesday 2026-08-25 15:45 ET if Monday sale has settled.
+Current: flat as of 2026-08-25 (Mon sale settled; Tue 15:45 SOXL buy
+missed). Cash ~$53.56 settled. Next SOXL buy: Wednesday 2026-08-26
+15:45 ET.
 
 ## Playbook (every regular session)
 
@@ -89,6 +89,12 @@ If settled `buying_power` >= $1.00 AND no same-day sale AND flat:
   then MU once. If all three alert, skip the rest of the session.
 - If buying_power is 0 because of unsettled proceeds: log skip, wait
   for the next close after settlement.
+- **Close-buy outcome verification:** by 16:05 ET the journal must
+  show one of: SOXL (or fallback) entry fill in TRADES.csv, explicit
+  skip (BP=0, alerts, halted), or DRYRUN/STOP. Flat with settled
+  buying_power and no skip line = missed close; log `MISSED CLOSE` and
+  set NEXT_WAKE to the next eligible 15:45 (do not leave cash idle
+  without a documented reason).
 
 If already holding the overnight name into the close: hold (that is
 the trade). Do not sell at 15:45.
@@ -151,7 +157,13 @@ If holding equity and no sell is already open:
    to queue the open sell. After that queue, set the next 09:31. Weekends
    and unsettled days: skip. If no trade is needed, still write a future
    NEXT_WAKE so the loop stays quiet.
-8. If market closed and no NEXT_WAKE was due: do not journal a heartbeat
+8. **Overdue NEXT_WAKE recovery:** if NEXT_WAKE timestamp is >15 min in
+   the past and no journal entry exists for that window, log
+   `MISSED WINDOW`, roll NEXT_WAKE to the next executable playbook time
+   (typically the following session's 15:45 for a missed close buy, or
+   09:31 if holding overnight equity), and process the overdue action
+   immediately if still inside the same playbook window.
+9. If market closed and no NEXT_WAKE was due: do not journal a heartbeat
    unless the wake file was wrong.
 
 ## Trade ledger
