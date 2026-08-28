@@ -56,9 +56,9 @@ If holding anything that is not the current overnight vehicle, sell
 buy the overnight name until that sale has settled (`buying_power` > 0
 and no same-day sale).
 
-Current: flat as of 2026-08-25 (Mon sale settled; Tue 15:45 SOXL buy
-missed). Cash ~$53.56 settled. Next SOXL buy: Wednesday 2026-08-26
-15:45 ET.
+Current: flat as of 2026-08-27 (Mon 8/24 sale settled; Tue–Thu 15:45
+SOXL buys missed). Cash ~$53.56 settled. Next SOXL buy: Friday
+2026-08-28 15:45 ET.
 
 ## Playbook (every regular session)
 
@@ -95,6 +95,12 @@ If settled `buying_power` >= $1.00 AND no same-day sale AND flat:
   buying_power and no skip line = missed close; log `MISSED CLOSE` and
   set NEXT_WAKE to the next eligible 15:45 (do not leave cash idle
   without a documented reason).
+- **Close-window backup wake:** when arming a 15:45 close buy, also
+  write `BACKUP_WAKE` (`YYYY-MM-DD 15:55` ET) in the same directory.
+  If no journal entry or TRADES.csv row exists by 15:50 and this chat
+  processes the backup wake, run the close buy immediately (still at
+  most one order). Clear `BACKUP_WAKE` after fill, skip, or `MISSED
+  CLOSE`.
 
 If already holding the overnight name into the close: hold (that is
 the trade). Do not sell at 15:45.
@@ -165,6 +171,11 @@ If holding equity and no sell is already open:
    immediately if still inside the same playbook window.
 9. If market closed and no NEXT_WAKE was due: do not journal a heartbeat
    unless the wake file was wrong.
+10. **Nightly review NEXT_WAKE bind:** at the 20:30 ET learning pass,
+    if `NEXT_WAKE` is in the past, log `MISSED WINDOW` for each skipped
+    close since the last journal fill or documented skip, roll `NEXT_WAKE`
+    to the next eligible playbook time, and update Flatten first state.
+    Do not leave a stale timestamp across calendar days.
 
 ## Trade ledger
 
