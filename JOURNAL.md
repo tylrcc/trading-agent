@@ -1272,3 +1272,15 @@ item 10 and Playbook §2.
 settled; three closes missed). `NEXT_WAKE` rolled to 2026-08-28 15:45;
 `BACKUP_WAKE` to arm at next close arming. Daily loss floor baseline:
 $53.56 (trip ~$26.78 at 50%).
+
+## 2026-08-28 12:37 ET — Reconnect; still flat; close buy armed
+
+User asked if the agent is up and trading. MCP grant still this chat.
+Account $53.56 cash, settled BP $53.56, positions none. Last fill is
+still the 8/24 TQQQ open sell. Tue/Wed/Thu 15:45 SOXL buys never fired
+(wake loop aborted; chat not processing closes).
+
+12:37 ET is midday: playbook does not buy until 15:45 (intraday is the
+decaying side). Armed one-shot wakes for 15:45 buy and 15:55 backup.
+No overnight sleeper (those keep getting aborted). Chat must stay open
+through the close.
