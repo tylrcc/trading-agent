@@ -307,3 +307,49 @@ Retry attempt 5...
 Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 6)...
 Retry attempt 6...
 RetriableError: Agent turn stopped after repeated resume attempts made no progress
+Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 1)...
+Retry attempt 1...
+Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 2)...
+Retry attempt 2...
+## Nightly review complete (2026-08-29)
+
+**MCP:** `user-robinhood-trading` is offline in this session (namespace absent). Did not re-auth per guardrails. Reconciled from `TRADES.csv` and journal fill math.
+
+### Realized P&L (expected MCP = ledger)
+
+**+$0.56** on 2 closed trades (+1.06% vs $53.00 start)
+
+| Trade | P&L |
+|-------|-----|
+| TQQQ 2026-07-14 round trip | +$0.18 |
+| TQQQ 2026-07-17 → 2026-08-24 | +$0.38 |
+
+**TRADES.csv:** 4 rows, 2 closed round trips. No missing rows.
+
+### Stats (2 closed trades)
+
+- **Win rate:** 100% (2W / 0L)
+- **Expectancy:** **+$0.28/trade** (+0.53% avg deployed notional)
+- **Account:** ~$53.56 cash, flat (last broker read 2026-08-28 12:37)
+
+### Period (2026-08-28 → 2026-08-29)
+
+- Fri 8/28 12:37: reconnect confirmed flat, settled ~$53.56; armed 15:45/15:55 wakes.
+- Fri 8/28 15:45: **fourth consecutive missed SOXL close buy** (Tue–Fri). No fill, no journal entry at close; background wakes did not produce an in-chat agent turn.
+- Sat 8/29: market closed; cash still idle.
+
+Primary failure: **execution uptime** (close window needs an active in-chat turn; wake files alone do not place orders).
+
+### Strategy tweaks (2, tactics only)
+
+1. **`CLOSE_TARGET` arming flag** — Playbook §2: durable date marker alongside `BACKUP_WAKE`
+2. **Close-first on in-chat turns** — Playbook §2 + cycle checklist item 5: any chat activity 15:40–16:00 on a close day runs the buy path first
+
+### State updated
+
+- `NEXT_WAKE` → `2026-08-31 15:45`
+- `BACKUP_WAKE` → `2026-08-31 15:55`
+- `CLOSE_TARGET` → `2026-08-31`
+- Full entry appended to `JOURNAL.md`
+
+No trades placed. Next live action: **Mon 2026-08-31 15:45 ET** SOXL close buy (this chat must be active in the 15:40–16:00 window).

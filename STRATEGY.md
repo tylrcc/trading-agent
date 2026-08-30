@@ -56,9 +56,9 @@ If holding anything that is not the current overnight vehicle, sell
 buy the overnight name until that sale has settled (`buying_power` > 0
 and no same-day sale).
 
-Current: flat as of 2026-08-27 (Mon 8/24 sale settled; Tue–Thu 15:45
-SOXL buys missed). Cash ~$53.56 settled. Next SOXL buy: Friday
-2026-08-28 15:45 ET.
+Current: flat as of 2026-08-29 (Mon 8/24 sale settled; Tue–Fri 15:45
+SOXL buys missed). Cash ~$53.56 settled. Next SOXL buy: Monday
+2026-08-31 15:45 ET.
 
 ## Playbook (every regular session)
 
@@ -96,11 +96,16 @@ If settled `buying_power` >= $1.00 AND no same-day sale AND flat:
   set NEXT_WAKE to the next eligible 15:45 (do not leave cash idle
   without a documented reason).
 - **Close-window backup wake:** when arming a 15:45 close buy, also
-  write `BACKUP_WAKE` (`YYYY-MM-DD 15:55` ET) in the same directory.
-  If no journal entry or TRADES.csv row exists by 15:50 and this chat
-  processes the backup wake, run the close buy immediately (still at
-  most one order). Clear `BACKUP_WAKE` after fill, skip, or `MISSED
-  CLOSE`.
+  write `BACKUP_WAKE` (`YYYY-MM-DD 15:55` ET) and `CLOSE_TARGET`
+  (`YYYY-MM-DD` only) in the same directory. If no journal entry or
+  TRADES.csv row exists by 15:50 and this chat processes the backup
+  wake, run the close buy immediately (still at most one order). Clear
+  `BACKUP_WAKE` and `CLOSE_TARGET` after fill, skip, or `MISSED CLOSE`.
+- **Close-first on in-chat turns:** background wake files are not
+  enough. Any agent cycle in this chat between 15:40-16:00 ET on a day
+  when `CLOSE_TARGET` matches today, settled `buying_power` >= $1, and
+  flat must run the close buy path before any other work (including
+  answering unrelated user messages). Do not defer to a later wake.
 
 If already holding the overnight name into the close: hold (that is
 the trade). Do not sell at 15:45.
@@ -153,7 +158,9 @@ If holding equity and no sell is already open:
    pull MCP order/fill history and backfill any missing TRADES.csv rows
    before the next trading window. User-placed fills count.
 5. Enforce the window: sell at open, buy SOXL at close, queue sell after
-   close. At most one new order per cycle.
+   close. At most one new order per cycle. If `CLOSE_TARGET` equals
+   today's ET date and local time is 15:40-16:00, run the close buy
+   path in this step before anything else.
 6. review → place if clean (skip place in DRYRUN). Log JOURNAL + TRADES.csv.
 7. **Re-arm NEXT_WAKE** to the next time an order is actually required
    (ET `YYYY-MM-DD HH:MM` in `/Users/tyler/ty/projects/trading-agent/NEXT_WAKE`).

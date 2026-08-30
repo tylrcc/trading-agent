@@ -1284,3 +1284,64 @@ still the 8/24 TQQQ open sell. Tue/Wed/Thu 15:45 SOXL buys never fired
 decaying side). Armed one-shot wakes for 15:45 buy and 15:55 backup.
 No overnight sleeper (those keep getting aborted). Chat must stay open
 through the close.
+
+## 2026-08-29 21:03 ET — Nightly review (learning pass)
+
+MCP pull (account 621325851): Robinhood MCP offline in this session
+(`user-robinhood-trading` namespace absent; do not re-login per
+guardrails). Cross-checked against TRADES.csv fill math, 8/28 in-chat
+MCP cycle entries, `NEXT_WAKE`/`BACKUP_WAKE`/`runner.log`, and prior
+journal fills.
+
+**Portfolio (last verified via in-chat MCP, 2026-08-28 12:37 ET; no broker
+read since):** total value $53.56, cash $53.56, equity $0.00, buying
+power $53.56 (settled). Positions: none. Open orders: none.
+STOP/DRYRUN/PAUSE_UNTIL: absent.
+
+**Realized P&L (span=all, reconciled from TRADES.csv):** +$0.56 total on 2
+closing trades. Expected MCP `get_realized_pnl` result: Trade 1 (TQQQ
+2026-07-14): 0.7 sh × ($75.2550 − $74.9999) = +$0.18. Trade 2 (TQQQ
+2026-07-17 → 2026-08-24): 0.774244 sh × ($69.1801 − $68.6863) = +$0.38.
+Total +$0.56 (+1.06% vs $53.00 start). No new fills logged 2026-08-28
+through 2026-08-29.
+
+**TRADES.csv reconciliation:** 4 rows (2 closed round trips). Matches
+journal and in-chat MCP fills through 8/24. No missing rows added. Exit
+rows `realized_pnl` +0.18 and +0.38 align with computed round-trips.
+
+**Stats (from TRADES.csv, 2 closed trades):**
+- Win rate: 100% (2W / 0L)
+- Expectancy: +$0.28/trade (+0.53% avg of deployed notional)
+- Avg win: +$0.28; avg loss: n/a (0 losses)
+- Total realized: +$0.56 vs $53.00 start → account +1.06% ($53.56 cash)
+
+**Period under review (2026-08-28 → 2026-08-29):**
+- Fri 8/28 12:37: user reconnect confirmed flat, settled ~$53.56; armed
+  one-shot 15:45/15:55 wakes for first SOXL close buy.
+- Fri 8/28 15:45: **fourth consecutive missed close.** No journal entry,
+  no TRADES.csv row, no `LAST_FIRED`; `NEXT_WAKE`/`BACKUP_WAKE` still
+  stuck on 2026-08-28. Headless `run-cycle.sh` skipped all day (no CLI
+  grant). In-chat wakes at 15:45/15:55 did not produce an agent turn.
+- Sat 8/29: market closed; cash still idle and settled.
+- Primary failure mode: **execution uptime** (close window requires an
+  active in-chat agent turn; background wake files alone do not execute
+  orders). Secondary: **MCP split** (learning pass cannot pull live
+  P&L; reconciled from ledger).
+
+**Lessons:**
+1. Arming 15:45/15:55 wake files without an in-chat turn at close is
+   equivalent to no trade; four skipped closes forfeited four SOXL gaps.
+2. User messages before close (12:37 reconnect) do not substitute for a
+   15:40-16:00 agent cycle; close buys must preempt other work when the
+   chat is active in that window.
+3. Two modest wins (+0.34%, +0.71%) are dwarfed by missed overnight
+   edges; the playbook only compounds when close cycles actually fire.
+
+**Strategy tweaks (2):** `CLOSE_TARGET` arming flag in Playbook §2;
+close-first bind on in-chat turns 15:40-16:00. See STRATEGY.md Playbook
+§2 and Cycle checklist item 5.
+
+**Next session:** Monday 2026-08-31 15:45 ET all-in SOXL buy (cash
+settled; four closes missed). `NEXT_WAKE` rolled to 2026-08-31 15:45;
+`BACKUP_WAKE` to 2026-08-31 15:55; `CLOSE_TARGET` to 2026-08-31. Daily
+loss floor baseline: $53.56 (trip ~$26.78 at 50%).
