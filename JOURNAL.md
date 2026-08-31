@@ -1345,3 +1345,62 @@ close-first bind on in-chat turns 15:40-16:00. See STRATEGY.md Playbook
 settled; four closes missed). `NEXT_WAKE` rolled to 2026-08-31 15:45;
 `BACKUP_WAKE` to 2026-08-31 15:55; `CLOSE_TARGET` to 2026-08-31. Daily
 loss floor baseline: $53.56 (trip ~$26.78 at 50%).
+
+## 2026-08-30 20:38 ET — Nightly review (learning pass)
+
+MCP pull (account 621325851): Robinhood MCP offline in this session
+(`robinhood-trading` namespace `needsAuth`; no callable tools; do not
+re-login per guardrails). Cross-checked against TRADES.csv fill math,
+8/28 in-chat MCP cycle entries, `NEXT_WAKE`/`BACKUP_WAKE`/`CLOSE_TARGET`,
+and `runner.log`.
+
+**Portfolio (last verified via in-chat MCP, 2026-08-28 12:37 ET; no broker
+read since):** total value $53.56, cash $53.56, equity $0.00, buying
+power $53.56 (settled). Positions: none. Open orders: none.
+STOP/DRYRUN/PAUSE_UNTIL: absent.
+
+**Realized P&L (span=all, reconciled from TRADES.csv):** +$0.56 total on 2
+closing trades. Expected MCP `get_realized_pnl` result: Trade 1 (TQQQ
+2026-07-14): 0.7 sh × ($75.2550 − $74.9999) = +$0.18. Trade 2 (TQQQ
+2026-07-17 → 2026-08-24): 0.774244 sh × ($69.1801 − $68.6863) = +$0.38.
+Total +$0.56 (+1.06% vs $53.00 start). No new fills logged 2026-08-29
+through 2026-08-30.
+
+**TRADES.csv reconciliation:** 4 rows (2 closed round trips). Matches
+journal and in-chat MCP fills through 8/24. No missing rows added. Exit
+rows `realized_pnl` +0.18 and +0.38 align with computed round-trips.
+
+**Stats (from TRADES.csv, 2 closed trades):**
+- Win rate: 100% (2W / 0L)
+- Expectancy: +$0.28/trade (+0.53% avg of deployed notional)
+- Avg win: +$0.28; avg loss: n/a (0 losses)
+- Total realized: +$0.56 vs $53.00 start → account +1.06% ($53.56 cash)
+
+**Period under review (2026-08-29 → 2026-08-30):**
+- Sat 8/29: market closed; cash idle and settled (~$53.56). No cycles
+  required. Wake files already rolled to Mon 8/31 close (8/29 review).
+- Sun 8/30: market closed for regular hours; no trades. `NEXT_WAKE`
+  2026-08-31 15:45, `BACKUP_WAKE` 2026-08-31 15:55, `CLOSE_TARGET`
+  2026-08-31 all correct (not stale). Headless `run-cycle.sh` skipped
+  (market closed / no CLI grant). Learning pass started 20:37 ET.
+- Five consecutive 15:45 SOXL close buys missed (Tue 8/25 through Fri
+  8/28); weekend adds no new miss but idle cash persists into week 2.
+- Primary failure mode: **execution uptime** (close window still requires
+  an active in-chat agent turn Mon 15:40-16:00). Secondary: **MCP split**
+  (learning pass cannot pull live P&L; reconciled from ledger).
+
+**Lessons:**
+1. Correct wake files over the weekend do not execute Monday's close;
+   the first trading-day in-chat turn must confirm arming before noon.
+2. Two modest wins (+0.34%, +0.71%) remain dwarfed by five forfeited
+   SOXL overnight edges; settled cash without a close fill is the drag.
+3. MCP offline on learning passes is expected; TRADES.csv + journal
+   remain sufficient for P&L reconciliation when no new fills occur.
+
+**Strategy tweaks (2):** midday close arming check; Sunday learning-pass
+Monday prep. See STRATEGY.md Cycle checklist items 5 and 10.
+
+**Next session:** Monday 2026-08-31 15:45 ET all-in SOXL buy (cash
+settled; five closes missed). `NEXT_WAKE`/`BACKUP_WAKE`/`CLOSE_TARGET`
+unchanged (already Mon 8/31). Daily loss floor baseline: $53.56 (trip
+~$26.78 at 50%).

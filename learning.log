@@ -353,3 +353,69 @@ Primary failure: **execution uptime** (close window needs an active in-chat turn
 - Full entry appended to `JOURNAL.md`
 
 No trades placed. Next live action: **Mon 2026-08-31 15:45 ET** SOXL close buy (this chat must be active in the 15:40–16:00 window).
+Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 1)...
+Retry attempt 1...
+Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 2)...
+Retry attempt 2...
+Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 3)...
+Retry attempt 3...
+Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 4)...
+Retry attempt 4...
+Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 5)...
+Retry attempt 5...
+Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 6)...
+Retry attempt 6...
+Connection lost, reconnecting to https://agentn.global.api5.cursor.sh (attempt 7)...
+Retry attempt 7...
+**Nightly review complete** (2026-08-30 20:38 ET). No trades placed.
+
+### MCP / portfolio
+Robinhood MCP is offline in this session (`needsAuth`; no re-login per guardrails). Last in-chat broker read: **2026-08-28 12:37 ET**. Account ~**$53.56** cash, flat, settled. STOP/DRYRUN/PAUSE absent.
+
+### Realized P&L (reconciled)
+| Trade | Round trip | P&L |
+|-------|------------|-----|
+| TQQQ 2026-07-14 | 0.7 sh @ $74.9999 → $75.2550 | +$0.18 |
+| TQQQ 2026-07-17 → 2026-08-24 | 0.774244 sh @ $68.6863 → $69.1801 | +$0.38 |
+| **Total** | 2 closed | **+$0.56** (+1.06% vs $53.00 start) |
+
+**TRADES.csv:** 4 rows, 2 closed round trips. No missing rows.
+
+### Stats (TRADES.csv)
+- **Win rate:** 100% (2W / 0L)
+- **Expectancy:** +$0.28/trade (+0.53% avg deployed notional)
+- **Avg win:** +$0.28; no losses yet
+
+### Period (2026-08-29 → 2026-08-30)
+Weekend idle. Wake files already point to **Mon 2026-08-31 15:45**## Nightly review complete (2026-08-30 20:38 ET)
+
+**MCP:** Offline (`robinhood-trading` needsAuth). No re-login per guardrails. P&L reconciled from TRADES.csv and journal fills.
+
+### Portfolio (last verified 2026-08-28 12:37 ET)
+- **Value:** $53.56 cash, flat, settled BP $53.56
+- **Positions/orders:** none
+- **Halt files:** STOP / DRYRUN / PAUSE_UNTIL absent
+
+### Realized P&L (reconciled)
+| Trade | Round trip | P&L |
+|-------|-----------|-----|
+| TQQQ 2026-07-14 | 0.7 sh @ $74.9999 → $75.2550 | +$0.18 |
+| TQQQ 2026-07-17 → 2026-08-24 | 0.774244 sh @ $68.6863 → $69.1801 | +$0.38 |
+| **Total** | 2 closed trades | **+$0.56 (+1.06% vs $53 start)** |
+
+**TRADES.csv:** 4 rows, 2 closed round trips. No missing rows.
+
+### Stats (from TRADES.csv)
+- **Win rate:** 100% (2W / 0L)
+- **Expectancy:** +$0.28/trade (+0.53% of deployed notional)
+- **Avg win:** +$0.28 | **Avg loss:** n/a
+
+### Period (2026-08-29 → 2026-08-30)
+Weekend idle. Wake files already correct for Monday close (`NEXT_WAKE` 2026-08-31 15:45, `BACKUP_WAKE` 15:55, `CLOSE_TARGET` 2026-08-31). Five consecutive SOXL close buys still missed (Tue–Fri); Monday 8/31 is the next executable window.
+
+### Strategy tweaks (2)
+1. **Midday close arming check** (Cycle checklist item 5): first in-chat turn 12:00–13:00 on close days logs `CLOSE ARMED` and verifies wake files.
+2. **Sunday Monday prep** (Cycle checklist item 10): Sunday learning pass verifies/rewrites wake files for the next trading day's close.
+
+### Next session
+**Monday 2026-08-31 15:45 ET** — all-in SOXL buy if this chat is active in the close window. Daily loss floor: $53.56 (trip ~$26.78 at 50%).

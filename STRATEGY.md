@@ -56,7 +56,7 @@ If holding anything that is not the current overnight vehicle, sell
 buy the overnight name until that sale has settled (`buying_power` > 0
 and no same-day sale).
 
-Current: flat as of 2026-08-29 (Mon 8/24 sale settled; Tue–Fri 15:45
+Current: flat as of 2026-08-30 (Mon 8/24 sale settled; Tue–Fri 15:45
 SOXL buys missed). Cash ~$53.56 settled. Next SOXL buy: Monday
 2026-08-31 15:45 ET.
 
@@ -160,7 +160,12 @@ If holding equity and no sell is already open:
 5. Enforce the window: sell at open, buy SOXL at close, queue sell after
    close. At most one new order per cycle. If `CLOSE_TARGET` equals
    today's ET date and local time is 15:40-16:00, run the close buy
-   path in this step before anything else.
+   path in this step before anything else. **Midday close arming check:**
+   on the first in-chat cycle between 12:00-13:00 ET when flat, settled
+   `buying_power` >= $1, and `CLOSE_TARGET` equals today, log `CLOSE
+   ARMED` to JOURNAL.md and confirm `NEXT_WAKE`, `BACKUP_WAKE`, and
+   `CLOSE_TARGET` all match today's 15:45/15:55 window; rewrite any
+   stale file before continuing.
 6. review → place if clean (skip place in DRYRUN). Log JOURNAL + TRADES.csv.
 7. **Re-arm NEXT_WAKE** to the next time an order is actually required
    (ET `YYYY-MM-DD HH:MM` in `/Users/tyler/ty/projects/trading-agent/NEXT_WAKE`).
@@ -182,7 +187,12 @@ If holding equity and no sell is already open:
     if `NEXT_WAKE` is in the past, log `MISSED WINDOW` for each skipped
     close since the last journal fill or documented skip, roll `NEXT_WAKE`
     to the next eligible playbook time, and update Flatten first state.
-    Do not leave a stale timestamp across calendar days.
+    Do not leave a stale timestamp across calendar days. **Sunday Monday
+    prep:** when the review runs on Sunday, verify `CLOSE_TARGET`,
+    `BACKUP_WAKE`, and `NEXT_WAKE` all point to the next trading day's
+    15:45/15:55 close window; rewrite any missing or mismatched file and
+    log `Mon close armed` (or the equivalent next-session date) in the
+    review entry.
 
 ## Trade ledger
 
