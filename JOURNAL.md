@@ -1404,3 +1404,18 @@ Monday prep. See STRATEGY.md Cycle checklist items 5 and 10.
 settled; five closes missed). `NEXT_WAKE`/`BACKUP_WAKE`/`CLOSE_TARGET`
 unchanged (already Mon 8/31). Daily loss floor baseline: $53.56 (trip
 ~$26.78 at 50%).
+
+## 2026-08-31 15:13 ET — Status: SOXL is on; agent loop was not
+
+User asked if it is up and running. MCP grant still this chat. No STOP.
+No wake loop process.
+
+Position: SOXL 0.479219, avg $111.77, all shares sellable. User-placed
+market buy 13:43 ET today ($53.56 @ $111.765). Mark ~$111.42, account
+~$53.40, unrealized about -$0.16. Cash $0, BP $0. No open orders.
+
+Agent did not place this fill (placed_agent=user). Backfilled TRADES.csv.
+Playbook: hold through the close (overnight is the trade). Do not sell
+at 15:45. Queue a regular_hours market sell at 16:05 for Tuesday open.
+Armed one-shot 16:05. Next live sell: Tue 2026-09-01 9:31 ET if the
+queue misses. Daily loss floor baseline: $53.40 (trip $26.70).
