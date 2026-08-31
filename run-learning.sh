@@ -25,10 +25,4 @@ cursor-agent -p --force --approve-mcps --trust --workspace "$HOME/ty" \
 echo "$(date '+%F %T') LEARN: exit=$?" >> "$LOG"
 
 cp "$HOME/ty/.cursor/rules/robinhood-trading-guardrails.mdc" "$DIR/guardrails-rule.md" 2>/dev/null
-cd "$DIR" && git add -A >/dev/null 2>&1
-if ! git diff --cached --quiet 2>/dev/null; then
-  GIT_AUTHOR_NAME=tylrcc GIT_AUTHOR_EMAIL=247895347+tylrcc@users.noreply.github.com \
-  GIT_COMMITTER_NAME=tylrcc GIT_COMMITTER_EMAIL=247895347+tylrcc@users.noreply.github.com \
-  git commit -m "nightly review: $(date '+%Y-%m-%d')" >/dev/null 2>&1
-  git push origin main >/dev/null 2>&1
-fi
+"$DIR/batch-commit.sh" >> "$LOG" 2>&1

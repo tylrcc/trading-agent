@@ -2222,3 +2222,17 @@
 2026-08-30 18:02:46 EDT SKIP: market closed
 2026-08-30 20:37:53 LEARN: start
 2026-08-30 22:34:26 LEARN: exit=0
+2026-08-30 22:38:24 EDT SKIP: overnight session, hourly cadence
+2026-08-31 02:51:38 EDT SKIP: overnight session, hourly cadence
+2026-08-31 11:20:13 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-31 12:05:50 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-31 12:20:52 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-31 12:35:53 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-31 12:52:31 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-31 13:07:32 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-31 13:22:35 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-31 13:37:36 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-31 13:52:38 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-31 14:07:39 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-31 14:55:53 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-08-31 15:10:55 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)

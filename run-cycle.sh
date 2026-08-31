@@ -101,10 +101,4 @@ kill "$WATCH" 2>/dev/null || true
 log "DONE: exit=$rc"
 
 cp "$HOME/ty/.cursor/rules/robinhood-trading-guardrails.mdc" "$DIR/guardrails-rule.md" 2>/dev/null
-cd "$DIR" && git add -A >/dev/null 2>&1
-if ! git diff --cached --quiet 2>/dev/null; then
-  GIT_AUTHOR_NAME=tylrcc GIT_AUTHOR_EMAIL=247895347+tylrcc@users.noreply.github.com \
-  GIT_COMMITTER_NAME=tylrcc GIT_COMMITTER_EMAIL=247895347+tylrcc@users.noreply.github.com \
-  git commit -m "cycle: $(date '+%Y-%m-%d %H:%M %Z')" >/dev/null 2>&1
-  git push origin main >/dev/null 2>&1 || log "WARN: git push failed"
-fi
+"$DIR/batch-commit.sh" 2>&1 | while read -r line; do log "$line"; done
