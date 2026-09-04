@@ -18,11 +18,13 @@ Public: https://github.com/tylrcc/trading-agent
    15:45 buy if settled cash, 16:05 queue sell if holding. Skip idle
    sessions (unsettled T+1, already flat, weekends).
    Requirement: keep this Cursor chat open; keepawake job prevents sleep.
-2. **launchd (WATCHDOG + future backup):**
+2. **launchd (WATCHDOG + nudges):**
    - `com.tylrcc.trading-cycle` every 15 min → `run-cycle.sh`; it checks CLI
      auth first and logs `SKIP: robinhood MCP needs login` instead of
-     burning a cycle. If Robinhood ever allows a second (CLI) grant, this
-     becomes the restart-proof engine automatically.
+     burning a cycle. Never call `mcp login` from this job.
+   - `com.tylrcc.trading-nudge` at 09:31 / 15:45 / 16:05 ET weekdays →
+     macOS notification + opens Cursor. Does not trade. This is how the
+     Mac pokes you when chat background sleeps get aborted.
    - `com.tylrcc.trading-learning` daily 8:30 PM → `run-learning.sh`
    - `com.tylrcc.trading-keepawake` always → `caffeinate -is`
 
@@ -34,9 +36,11 @@ chmod +x ~/ty/projects/trading-agent/run-*.sh
 launchctl bootout gui/$(id -u)/com.tylrcc.trading-cycle 2>/dev/null
 launchctl bootout gui/$(id -u)/com.tylrcc.trading-learning 2>/dev/null
 launchctl bootout gui/$(id -u)/com.tylrcc.trading-keepawake 2>/dev/null
+launchctl bootout gui/$(id -u)/com.tylrcc.trading-nudge 2>/dev/null
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tylrcc.trading-cycle.plist
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tylrcc.trading-learning.plist
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tylrcc.trading-keepawake.plist
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.tylrcc.trading-nudge.plist
 ```
 
 ## Start / restart the in-chat wake loop

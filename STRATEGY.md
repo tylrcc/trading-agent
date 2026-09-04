@@ -107,8 +107,10 @@ If settled `buying_power` >= $1.00 AND no same-day sale AND flat:
   flat must run the close buy path before any other work (including
   answering unrelated user messages). Do not defer to a later wake.
 
-If already holding the overnight name into the close: hold (that is
-the trade). Do not sell at 15:45.
+- If already past the first regular open after entry (stale hold): do
+  **not** dump midday (that is the decaying side). Hold to the next
+  regular open and sell there. Next open after a Friday is Monday, or
+  Tuesday if Monday is a holiday (Labor Day 2026-09-07).
 
 ### 3. After close (16:05-16:15 ET) — queue next-open sell
 

@@ -1419,3 +1419,24 @@ Playbook: hold through the close (overnight is the trade). Do not sell
 at 15:45. Queue a regular_hours market sell at 16:05 for Tuesday open.
 Armed one-shot 16:05. Next live sell: Tue 2026-09-01 9:31 ET if the
 queue misses. Daily loss floor baseline: $53.40 (trip $26.70).
+
+## 2026-09-04 12:55 ET — Catch-up: SOXL still on, +$2.70, agent was dead
+
+User: make it fully profitable and working; nothing ran since Mon 8/31.
+MCP grant still this chat. CLI robinhood still unauthenticated (do not
+login). STOP absent.
+
+Position: SOXL 0.479219 @ $111.77, mark ~$117.40, account **$56.27**
+(unrealized about +$2.70 / +5.0%). No sell since the 8/31 13:43 user buy.
+Missed Tue 9/1, Wed 9/2, Thu 9/3 opens. Holding extra overnights is why
+it is green; dumping at 12:55 Friday would be selling the decaying
+intraday side.
+
+Decision: HOLD to Friday close. Do not sell midday. At 16:05 ET queue a
+GTC regular_hours market sell for Tue 2026-09-08 9:31 open (Mon 9/7 is
+Labor Day). If that queue misses, sell live Tue 9:31.
+
+Uptime fix: Cursor aborts in-chat `sleep` timers, so those cannot be the
+engine. Installed `com.tylrcc.trading-nudge` (macOS notification + open
+Cursor at 09:31 / 15:45 / 16:05 weekdays). This chat still places every
+order. Keep this chat open. Daily loss floor: $56.27 (trip $28.14).
