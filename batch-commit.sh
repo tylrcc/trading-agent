@@ -13,10 +13,13 @@ DIR="$HOME/ty/projects/trading-agent"
 STATE="$DIR/.next-batch"          # gitignored; holds the next batch date
 cd "$DIR" || exit 0
 
-export GIT_AUTHOR_NAME=tylrcc
-export GIT_AUTHOR_EMAIL=247895347+tylrcc@users.noreply.github.com
-export GIT_COMMITTER_NAME=tylrcc
-export GIT_COMMITTER_EMAIL=247895347+tylrcc@users.noreply.github.com
+# Use an email that is NOT on the GitHub account so these automated
+# commits never light up the contribution graph. Manual real-work
+# commits still use tylrcc and still count.
+export GIT_AUTHOR_NAME=trading-agent
+export GIT_AUTHOR_EMAIL=trading-agent@noreply.local
+export GIT_COMMITTER_NAME=trading-agent
+export GIT_COMMITTER_EMAIL=trading-agent@noreply.local
 
 today=$(date '+%Y-%m-%d')
 
