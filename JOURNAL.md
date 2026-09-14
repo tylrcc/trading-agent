@@ -1440,3 +1440,18 @@ Uptime fix: Cursor aborts in-chat `sleep` timers, so those cannot be the
 engine. Installed `com.tylrcc.trading-nudge` (macOS notification + open
 Cursor at 09:31 / 15:45 / 16:05 weekdays). This chat still places every
 order. Keep this chat open. Daily loss floor: $56.27 (trip $28.14).
+
+## 2026-09-14 16:02 ET — Queued SOXL sell for Tue open (10 idle days)
+
+User: nothing ran in 10 days. Correct. Last agent order was 8/24 TQQQ
+sell. SOXL lot from 8/31 13:43 user buy was never exited. Sep 4 mark
+was $56.27; now **$48.63** (mark ~$101.14 vs $111.77 cost, about -$4.93
+unrealized). The idle hold ate the overnight edge and then some.
+
+16:01 ET, RTH closed. Review sell 0.479219 SOXL market regular_hours:
+order_checks empty. GTC rejected (`Invalid time in force for fractional
+order`). GFD placed, state **queued** (id 6aa852ae-dc7b-4978-aa12-7dbcef1eb08c).
+Should print at Tue 2026-09-15 9:30 open. NEXT_WAKE 09:31 backup if the
+queue dies. Do not buy until that sale settles (T+1).
+
+This chat must be open Tue morning or a killed queue has no live retry.
