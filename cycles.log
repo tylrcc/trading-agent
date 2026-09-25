@@ -7,3 +7,4 @@ ActionRequiredError: Increase limits for faster responses You're out of usage. S
 Error: [unavailable] getaddrinfo ENOTFOUND api2.cursor.sh
 Error: [unavailable] getaddrinfo ENOTFOUND api2.cursor.sh
 Error: Authentication required. Please run 'agent login' first, or set CURSOR_API_KEY environment variable.
+Error: Authentication required. Please run 'agent login' first, or set CURSOR_API_KEY environment variable.
