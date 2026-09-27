@@ -2599,3 +2599,15 @@ batch-commit: holding changes until 2026-09-24
 2026-09-24 17:50:43 EDT SKIP: overnight session, hourly cadence
 2026-09-24 20:34:06 LEARN: start
 2026-09-24 20:34:07 LEARN: exit=0
+batch-commit: pushed 1 commit(s); next batch 2026-09-26
+2026-09-24 23:24:09 EDT SKIP: overnight session, hourly cadence
+2026-09-25 00:51:25 EDT SKIP: overnight session, hourly cadence
+2026-09-25 11:55:27 EDT NUDGE: window 11:55, opening Cursor
+2026-09-25 15:57:43 EDT NUDGE: window 15:57, opening Cursor
+2026-09-25 16:13:40 EDT NUDGE: window 16:13, opening Cursor
+2026-09-25 17:52:36 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-09-25 20:34:01 LEARN: start
+2026-09-25 20:34:02 LEARN: exit=0
+batch-commit: holding changes until 2026-09-26
+2026-09-26 20:30:01 LEARN: start
+2026-09-26 20:30:02 LEARN: exit=0
