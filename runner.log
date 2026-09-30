@@ -2655,3 +2655,7 @@ batch-commit: holding changes until 2026-09-29
 2026-09-29 15:47:19 EDT NUDGE: window 15:47, opening Cursor
 2026-09-29 16:04:55 EDT RUN: session=regular
 2026-09-29 16:04:56 EDT DONE: exit=1
+2026-09-29 16:04:56 EDT batch-commit: push FAILED, will retry next run
+2026-09-29 16:05:00 EDT NUDGE: window 16:05, opening Cursor
+2026-09-29 20:44:41 LEARN: start
+2026-09-29 20:44:42 LEARN: exit=0
