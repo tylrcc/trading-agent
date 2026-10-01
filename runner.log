@@ -2659,3 +2659,22 @@ batch-commit: holding changes until 2026-09-29
 2026-09-29 16:05:00 EDT NUDGE: window 16:05, opening Cursor
 2026-09-29 20:44:41 LEARN: start
 2026-09-29 20:44:42 LEARN: exit=0
+batch-commit: push FAILED, will retry next run
+2026-09-30 01:32:15 EDT SKIP: overnight session, hourly cadence
+2026-09-30 01:47:15 EDT SKIP: overnight session, hourly cadence
+2026-09-30 02:49:40 EDT SKIP: overnight session, hourly cadence
+2026-09-30 03:04:42 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-09-30 03:19:42 EDT SKIP: overnight session, hourly cadence
+2026-09-30 03:34:42 EDT SKIP: overnight session, hourly cadence
+2026-09-30 07:55:53 EDT SKIP: overnight session, hourly cadence
+2026-09-30 09:37:32 EDT NUDGE: window 09:37, opening Cursor
+2026-09-30 10:39:17 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-09-30 12:10:58 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-09-30 12:26:00 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-09-30 12:41:03 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-09-30 12:56:06 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-09-30 13:23:54 EDT SKIP: headless CLI has no Robinhood session (IDE chat holds the only grant; do not login)
+2026-09-30 16:01:13 EDT NUDGE: window 16:01, opening Cursor
+2026-09-30 16:08:57 EDT NUDGE: window 16:08, opening Cursor
+2026-09-30 20:32:48 LEARN: start
+2026-09-30 20:32:49 LEARN: exit=0
